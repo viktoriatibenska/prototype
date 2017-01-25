@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AlertModule } from 'ng2-bootstrap';
 import { ButtonsModule } from 'ng2-bootstrap/buttons';
+import { AccordionModule } from 'ng2-bootstrap/accordion';
 
 import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
@@ -32,6 +33,7 @@ import { LogInComponent } from './log-in/log-in.component';
     AppRoutingModule,
     AlertModule.forRoot(),
     ButtonsModule.forRoot(),
+    AccordionModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
