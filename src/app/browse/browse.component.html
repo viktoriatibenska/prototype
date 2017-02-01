@@ -1,3 +1,13 @@
-<h2>
-  Browse page
-</h2>
+<accordion *ngFor="let pattern of patterns" [closeOthers]="oneAtATime">
+  <div class="pattern-list-item">
+    <accordion-group #group [isOpen]="status.isOpen">
+      <div accordion-heading>
+        <i class="pull-left float-xs-left glyphicon"
+         [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+        <b>&ensp;{{pattern.name}} </b>
+        <button type="button" class="btn btn-default pull-right float-xs-right play-btn">Play</button>
+      </div>
+      {{pattern.description}}
+    </accordion-group>
+  </div>
+</accordion>
