@@ -1,13 +1,34 @@
-<accordion *ngFor="let pattern of patterns" [closeOthers]="oneAtATime">
-  <div class="pattern-list-item">
+<accordion>
+  <div class="pattern-list-item" *ngFor="let pattern of patterns">
     <accordion-group #group [isOpen]="status.isOpen">
       <div accordion-heading>
         <i class="pull-left float-xs-left glyphicon"
          [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
-        <b>&ensp;{{pattern.name}} </b>
-        <button type="button" class="btn btn-default pull-right float-xs-right play-btn">Play</button>
+        <b>&ensp;{{pattern.name}}</b>
+        
+        <span id="right-margin-fix" class="pull-right float-xs-right">
+          <rating class="panel-right" [(ngModel)]="pattern.rating" [max]="max" [readonly]="isReadonly"></rating>
+          <a class="panel-right" *ngIf="pattern.published" tooltip="Pattern is published. To cancel publication click here.">
+            <span class="glyphicon glyphicon-ok"></span>
+          </a>
+          <a class="panel-right" *ngIf="!pattern.published" tooltip="Pattern is not published. To do so click here.">
+            <span class="glyphicon glyphicon-remove"></span>
+          </a>
+          <a class="panel-right" tooltip="Edit">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </a>
+          <a class="panel-right icon" tooltip="Design pattern gameplay scenario">
+            <img src="../../diagram-icon2.svg">
+          </a>
+          <button type="button" class="panel-right btn btn-default play-btn">Play</button>
+        </span>
       </div>
+      
+      <p>
       {{pattern.description}}
+      </p>
+
+      <button type="button" class="btn btn-default pull-right float-xs-right">More details</button>
     </accordion-group>
   </div>
 </accordion>
