@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AccordionConfig } from 'ng2-bootstrap';
-import { Pattern } from '../objects/pattern'
+import { Pattern } from '../objects/pattern';
 
-import { PatternService } from '../pattern.service'
+import { PatternService } from '../pattern.service';
 
 export function getAccordionConfig(): AccordionConfig {
   return Object.assign(new AccordionConfig(), {closeOthers: true});
@@ -15,10 +15,6 @@ export function getAccordionConfig(): AccordionConfig {
   providers: [{provide: AccordionConfig, useFactory: getAccordionConfig}]
 })
 export class BrowseComponent implements OnInit {
-  ngOnInit(): void {
-      this.getPatterns();
-  }
-
   public oneAtATime: boolean = true;
 
   public max: number = 5;
@@ -30,7 +26,11 @@ export class BrowseComponent implements OnInit {
   };
 
   patterns;
-    
+
+  ngOnInit(): void {
+      this.getPatterns();
+  }
+
   constructor(private patternService: PatternService) { }
 
   getPatterns(): void {

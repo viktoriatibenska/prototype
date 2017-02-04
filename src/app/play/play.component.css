@@ -1,0 +1,18 @@
+.state-description {
+    font-size: large;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.transitions {
+    font-size: medium;
+}
+
+.transitions a {
+    text-decoration: none;
+    color: #333;
+}
+
+a:hover .well {
+    background: #e3e3e3;
+}

@@ -6,6 +6,7 @@ import { CreateComponent } from '../create/create.component';
 import { AboutComponent } from '../about/about.component';
 import { LogInComponent } from '../log-in/log-in.component';
 import { SignUpComponent } from '../sign-up/sign-up.component';
+import { PlayComponent } from '../play/play.component';
 
 const routes: Routes = [
     {
@@ -27,6 +28,10 @@ const routes: Routes = [
     {
         path: 'login',
         component: LogInComponent
+    },
+    {
+        path: 'play',
+        component: PlayComponent
     },
     {
         path: '',
