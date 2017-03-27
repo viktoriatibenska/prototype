@@ -1,7 +1,16 @@
+import { Variation } from './variation';
+
 export class Pattern {
     id: number;
+    primaryVariationId: number;
     name: string;
-    description: string;
+    context: string;
+    forces: string;
+    solution: string;
+    discussion: string;
+    patlet: string;
     rating: number;
-    published: boolean;
+    isPublished: boolean;
+
+    variations: Variation[];
 }

@@ -1,6 +1,7 @@
 export class Transition {
     id: number;
+    name: string;
     description: string;
-    stateFrom: number;
-    stateTo: number;
+    stateFromId: number;
+    stateToId: number;
 }
