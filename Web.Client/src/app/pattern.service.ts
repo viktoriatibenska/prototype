@@ -7,13 +7,18 @@ import 'rxjs/add/operator/toPromise';
 import { Pattern } from './objects/pattern';
 
 function toPattern(r: any): Pattern {
-    const pattern = <Pattern>({
-        id: r.id,
-        name: r.name,
-        description: r.context,
-        rating: 4,
-        published: false,
-    });
+    let pattern = new Pattern(
+        r.id,
+        r.primary_variation_id,
+        r.name,
+        r.context,
+        r.forces,
+        r.solution,
+        r.discussion,
+        r.patlet,
+        r.rating,
+        r.is_published
+    );
     console.log('Parsed pattern:', pattern);
     return pattern;
 }
