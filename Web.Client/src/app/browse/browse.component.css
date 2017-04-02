@@ -55,3 +55,7 @@ a .glyphicon-remove {
 a:hover .glyphicon-remove {
     color: #b30000;
 }
+
+.row{
+    margin-bottom: 1rem;
+}

@@ -1,3 +1,11 @@
+<div class="row">
+  <div class="col-sm-12">
+    <button type="button" class="btn btn-default" routerLink="/create" tooltip="Add new pattern">
+      <span class="glyphicon glyphicon-plus"></span>
+    </button>
+  </div>
+</div>
+
 <accordion>
   <div class="pattern-list-item" *ngFor="let pattern of patterns">
     <accordion-group #group [isOpen]="status.isOpen">
@@ -8,10 +16,10 @@
         
         <span id="right-margin-fix" class="pull-right float-xs-right">
           <rating class="panel-right" [(ngModel)]="pattern.rating" [max]="max" [readonly]="isReadonly"></rating>
-          <a class="panel-right" *ngIf="pattern.published" tooltip="Pattern is published. To cancel publication click here.">
+          <a class="panel-right" *ngIf="pattern.isPublished" tooltip="Pattern is published. To cancel publication click here.">
             <span class="glyphicon glyphicon-ok"></span>
           </a>
-          <a class="panel-right" *ngIf="!pattern.published" tooltip="Pattern is not published. To do so click here.">
+          <a class="panel-right" *ngIf="!pattern.isPublished" tooltip="Pattern is not published. To do so click here.">
             <span class="glyphicon glyphicon-remove"></span>
           </a>
           <a class="panel-right" tooltip="Edit">
@@ -25,10 +33,18 @@
       </div>
       
       <p>
-        {{pattern.description}}
+        {{pattern.patlet}}
       </p>
 
       <button type="button" class="btn btn-default pull-right float-xs-right">More details</button>
     </accordion-group>
   </div>
 </accordion>
+
+<div class="row">
+  <div class="col-sm-12">
+    <alert type="info" *ngIf="patternsEmpty">
+      <strong>Heads up!</strong> There are no patterns to display. To create new patterns click the plus button above.
+    </alert>
+  </div>
+</div>

@@ -27,15 +27,22 @@ export class BrowseComponent implements OnInit {
 
   patterns: Pattern[] = [];
 
-  constructor(private patternService: PatternService) { }
+  patternsEmpty: boolean;
+
+  constructor(private patternService: PatternService) {
+    this.patternsEmpty = true;
+  }
 
   ngOnInit() {
     this.patternService
       .getPatterns()
-      .subscribe(p => this.patterns = p);
-
-    //this.patternService.getPatterns().then(patterns => this.patterns = patterns);
-
+      .subscribe(function(p){
+        this.patterns = p;
+        
+        if (this.patterns.length != 0){
+          this.patternsEmpty = false;
+        }
+      });
   }
 
 }
