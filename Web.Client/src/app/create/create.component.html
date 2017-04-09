@@ -10,45 +10,46 @@
   </div>
 
   <div>
-    <label>Context</label>
-    <input type="text" class="form-control" formControlName="context">
+    <label for="context">Context</label>
+    <textarea class="form-control" rows="5" id="context" formControlName="context"></textarea>
     <small [hidden]="patternDetailForm.controls.context.valid || (patternDetailForm.controls.context.pristine && !submitted)">
         Context is required.
     </small>
   </div>
 
   <div>
-    <label>Forces</label>
-    <input type="text" class="form-control" formControlName="forces">
+    <label for="forces">Forces</label>
+    <textarea class="form-control" rows="5" id="forces" formControlName="forces"></textarea>
     <small [hidden]="patternDetailForm.controls.forces.valid || (patternDetailForm.controls.forces.pristine && !submitted)">
         Forces is required.
     </small>
   </div>
 
   <div>
-    <label>Solution</label>
-    <input type="text" class="form-control" formControlName="solution">
+    <label for="solution">Solution</label>
+    <textarea class="form-control" rows="5" id="solution" formControlName="solution"></textarea>
     <small [hidden]="patternDetailForm.controls.solution.valid || (patternDetailForm.controls.solution.pristine && !submitted)">
         Solution is required.
     </small>
   </div>
 
   <div>
-    <label>Discussion</label>
-    <input type="text" class="form-control" formControlName="discussion">
+    <label for="discussion">Discussion</label>
+    <textarea class="form-control" rows="5" id="discussion" formControlName="discussion"></textarea>
     <small [hidden]="patternDetailForm.controls.discussion.valid || (patternDetailForm.controls.discussion.pristine && !submitted)">
         Discussion is required.
     </small>
   </div>
 
   <div>
-    <label>Patlet</label>
-    <input type="text" class="form-control" formControlName="patlet">
+    <label for="patlet">Patlet</label>
+    <textarea class="form-control" rows="5" id="patlet" formControlName="patlet"></textarea>
     <small [hidden]="patternDetailForm.controls.patlet.valid || (patternDetailForm.controls.patlet.pristine && !submitted)">
         Patlet is required.
     </small>
   </div>
 
-  <button type="submit" class="btn btn-primary">Save</button>
-
+  <div class="divider">
+    <button type="submit" class="btn btn-primary">Save</button>
+  </div>
 </form>

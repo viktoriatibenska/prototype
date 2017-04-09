@@ -18,7 +18,7 @@ export class CreateComponent implements OnInit {
 
   ngOnInit() {
     this.patternDetailForm = this._fb.group({
-      name: ['Name', [<any>Validators.required, <any>Validators.minLength(5)]],
+      name: ['', [<any>Validators.required, <any>Validators.minLength(5)]],
       context: ['', <any>Validators.required],
       forces: ['', <any>Validators.required],
       solution: ['', <any>Validators.required],
