@@ -1,22 +1,24 @@
 import { Variation } from './variation';
 
 export class Pattern {
-    private id: number;
-    private primaryVariationId: number;
-    private name: string;
-    private context: string;
-    private forces: string;
-    private solution: string;
-    private discussion: string;
-    private patlet: string;
-    private rating: number;
-    private isPublished: boolean;
+    id: number;
+    primaryVariationId: number;
+    primaryVariation: Variation;
+    name: string;
+    context: string;
+    forces: string;
+    solution: string;
+    discussion: string;
+    patlet: string;
+    rating: number;
+    isPublished: boolean;
 
-    private variations: Variation[];
+    variations: Variation[];
 
     constructor(
         id: number,
         primaryVariationId: number,
+        primaryVariation: Variation,
         name: string,
         context: string,
         forces: string,
@@ -28,6 +30,7 @@ export class Pattern {
     ){
         this.id = id;
         this.primaryVariationId = primaryVariationId;
+        this.primaryVariation = primaryVariation;
         this.name = name;
         this.context = context;
         this.forces = forces;
@@ -52,5 +55,9 @@ export class Pattern {
 
     getName(){
         return this.name;
+    }
+
+    getPrimaryVariation(){
+        return this.primaryVariation;
     }
 }

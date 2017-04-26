@@ -37,6 +37,8 @@ export class BrowseComponent implements OnInit {
       .subscribe((p) => {
         this.patterns = p;
       
+        console.log(this.patterns[0].primaryVariation.startStateId);
+
         if (this.patterns.length > 0){
           this.patternsEmpty = false;
         } else {

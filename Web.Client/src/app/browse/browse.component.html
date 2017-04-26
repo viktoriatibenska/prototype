@@ -31,7 +31,7 @@
           <a class="panel-right icon" tooltip="Design pattern gameplay scenario">
             <img src="src/resources/diagram-icon2.svg">
           </a>
-          <button type="button" class="panel-right btn btn-default play-btn" routerLink="/play">Play</button>
+          <button type="button" class="panel-right btn btn-default play-btn" routerLink="/play" [disabled]="pattern.primaryVariation.startStateId === null">Play</button>
         </span>
       </div>
       

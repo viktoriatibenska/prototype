@@ -21,7 +21,7 @@ module.exports = {
 };
 
 function getAllPatterns(req, res, next) {
-	db.any('select * from pattern')
+	db.any('SELECT p.id as pattern_pk_id, v.id as variation_pk_id, p.name as pattern_name, v.name as variation_name, * FROM pattern as p join variation as v ON p.primary_variation_id = v.id')
 	.then(function (data) {
 		res.status(200)
 			.json({

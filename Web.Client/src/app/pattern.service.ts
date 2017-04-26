@@ -5,12 +5,21 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/toPromise';
 
 import { Pattern } from './objects/pattern';
+import { Variation } from './objects/variation';
 
 function toPattern(r: any): Pattern {
     let pattern = new Pattern(
-        r.id,
+        r.pattern_pk_id,
         r.primary_variation_id,
-        r.name,
+        new Variation(
+            r.variation_pk_id,
+            r.start_state_id,
+            r.created_by_id,
+            r.variation_name,
+            r.note,
+            r.created_time
+        ),
+        r.pattern_name,
         r.context,
         r.forces,
         r.solution,
