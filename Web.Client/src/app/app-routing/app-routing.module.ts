@@ -30,7 +30,7 @@ const routes: Routes = [
         component: LogInComponent
     },
     {
-        path: 'play',
+        path: 'play/:stateId',
         component: PlayComponent
     },
     {

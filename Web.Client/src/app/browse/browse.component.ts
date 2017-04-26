@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccordionConfig } from 'ng2-bootstrap';
+import { Router } from '@angular/router';
 import { Pattern } from '../objects/pattern';
 
 import { PatternService } from '../pattern.service';
@@ -29,7 +30,7 @@ export class BrowseComponent implements OnInit {
 
   public patternsEmpty: boolean;
 
-  constructor(private patternService: PatternService) {}
+  constructor(private patternService: PatternService, private router: Router) {}
 
   ngOnInit() {
     this.patternService
@@ -64,5 +65,9 @@ export class BrowseComponent implements OnInit {
             this.patternsEmpty = true;
           }
         })
+  }
+
+  onPlayBtn(variationId: number){
+    this.router.navigate(['/play', variationId]);
   }
 }

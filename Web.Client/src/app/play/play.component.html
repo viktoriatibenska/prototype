@@ -1,11 +1,11 @@
-<div class="row">
+<div class="row" *ngIf="isDataAvailable">
   <div class="col-md-8 col-md-offset-2">
     <div class="state-description">
       {{state.description}}
     </div>
 
-    <div class="transitions" *ngFor="let transition of state.transitions">
+    <!--<div class="transitions" *ngFor="let transition of state.transitions">
       <a><div class="well">{{transition.description}}</div></a>
-    </div>
+    </div>-->
   </div>
 </div>

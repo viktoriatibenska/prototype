@@ -17,7 +17,8 @@ module.exports = {
 	getSinglePattern: getSinglePattern,
 	createPattern: createPattern,
 	updatePattern: updatePattern,
-	removePattern: removePattern
+	removePattern: removePattern,
+  getSingleState: getSingleState
 };
 
 function getAllPatterns(req, res, next) {
@@ -44,6 +45,22 @@ function getSinglePattern(req, res, next) {
           status: 'success',
           data: data,
           message: 'Retrieved ONE pattern'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+function getSingleState(req, res, next) {
+  var stateID = parseInt(req.params.id);
+  db.one('select * from state where id = $1', stateID)
+    .then(function (data) {
+      res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved ONE state'
         });
     })
     .catch(function (err) {

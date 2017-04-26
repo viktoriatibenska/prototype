@@ -6,6 +6,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { Pattern } from './objects/pattern';
 import { Variation } from './objects/variation';
+import { State } from './objects/state';
 
 function toPattern(r: any): Pattern {
     let pattern = new Pattern(
@@ -32,6 +33,19 @@ function toPattern(r: any): Pattern {
     return pattern;
 }
 
+function toState(r: any): State {
+    let state = new State(
+        r.id,
+        r.variation_id,
+        r.name,
+        r.description,
+        r.positionX,
+        r.positionY
+    );
+    console.log('Parsed state:', state);
+    return state;
+}
+
 @Injectable()
 export class PatternService {
     private baseUrl: string = 'http://localhost:3000/api';
@@ -43,6 +57,11 @@ export class PatternService {
     mapPatterns(response: Response): Pattern[] {
         console.log('Mapping patterns');
         return response.json().data.map(toPattern);
+    }
+    
+    mapState(response: Response): State {
+        console.log('Mapping state');
+        return toState(response.json().data);
     }
 
     private getHeaders(): Headers {
@@ -72,11 +91,20 @@ export class PatternService {
                     .catch(this.handleError);
     }
 
-    createPattern(pattern: Pattern) {
-        console.log('Calling create for pattern');
-        this.http.post(`${this.baseUrl}/pattern`,
-            {
-                
-            }).catch(this.handleError);
+    getState(id: number): Observable<State>{
+        console.log('Calling get for state', id);
+        const state$ = this.http
+            .get(`${this.baseUrl}/state/${id}`, {headers: this.getHeaders()})
+            .map(this.mapState)
+            .catch(this.handleError);
+        return state$;
     }
+
+    // createPattern(pattern: Pattern) {
+    //     console.log('Calling create for pattern');
+    //     this.http.post(`${this.baseUrl}/pattern`,
+    //         {
+                
+    //         }).catch(this.handleError);
+    // }
 }
