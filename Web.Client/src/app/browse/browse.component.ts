@@ -25,24 +25,42 @@ export class BrowseComponent implements OnInit {
     isOpen: false
   };
 
-  patterns: Pattern[] = [];
+  public patterns: Pattern[] = [];
 
-  patternsEmpty: boolean;
+  public patternsEmpty: boolean;
 
-  constructor(private patternService: PatternService) {
-    this.patternsEmpty = true;
-  }
+  constructor(private patternService: PatternService) {}
 
   ngOnInit() {
     this.patternService
       .getPatterns()
-      .subscribe(function(p){
+      .subscribe((p) => {
         this.patterns = p;
-        
-        if (this.patterns.length != 0){
+      
+        if (this.patterns.length > 0){
           this.patternsEmpty = false;
+        } else {
+          this.patternsEmpty = true;
         }
       });
   }
 
+  deletePattern(patternId: number){
+    console.log("Deleting pattern", patternId);
+
+    this.patternService.deletePattern(patternId)
+        .subscribe(() => {
+          console.log("Ok")
+
+          this.patterns = this.patterns.filter(function(pattern){
+            return pattern.getId() != patternId;
+          });
+
+          if (this.patterns.length > 0){
+            this.patternsEmpty = false;
+          } else {
+            this.patternsEmpty = true;
+          }
+        })
+  }
 }

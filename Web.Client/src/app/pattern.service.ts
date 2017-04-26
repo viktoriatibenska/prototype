@@ -33,17 +33,6 @@ export class PatternService {
 
     mapPatterns(response: Response): Pattern[] {
         console.log('Mapping patterns');
-        // return response.json().data.map(function toPattern(r: any): Pattern {
-        //     const pattern = <Pattern>({
-        //         id: r.id,
-        //         name: r.name,
-        //         description: r.context,
-        //         rating: 4,
-        //         published: false,
-        //     });
-        //     console.log('Parsed pattern:', pattern);
-        //     return pattern;
-        // });
         return response.json().data.map(toPattern);
     }
 
@@ -65,5 +54,20 @@ export class PatternService {
             .map(this.mapPatterns)
             .catch(this.handleError);
         return patterns$;
+    }
+
+    deletePattern(id: number): Observable<void> {
+        console.log('Calling delete for pattern', id);
+        return this.http
+                    .delete(`${this.baseUrl}/pattern/${id}`)
+                    .catch(this.handleError);
+    }
+
+    createPattern(pattern: Pattern) {
+        console.log('Calling create for pattern');
+        this.http.post(`${this.baseUrl}/pattern`,
+            {
+                
+            }).catch(this.handleError);
     }
 }
