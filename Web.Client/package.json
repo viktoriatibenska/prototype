@@ -24,6 +24,7 @@
     "angular-in-memory-web-api": "^0.2.4",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
+    "jointjs": "^1.1.0",
     "ng2-bootstrap": "^1.2.5",
     "rxjs": "^5.0.1",
     "ts-helpers": "^1.1.1",
