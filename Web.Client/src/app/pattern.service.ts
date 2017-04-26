@@ -7,6 +7,7 @@ import 'rxjs/add/operator/toPromise';
 import { Pattern } from './objects/pattern';
 import { Variation } from './objects/variation';
 import { State } from './objects/state';
+import { Transition } from './objects/transition';
 
 function toPattern(r: any): Pattern {
     let pattern = new Pattern(
@@ -46,13 +47,23 @@ function toState(r: any): State {
     return state;
 }
 
+function toTransition(r: any): Transition {
+    let transition = new Transition(
+        r.id,
+        r.name,
+        r.description,
+        r.state_from_id,
+        r.state_to_id
+    );
+    console.log('Parsed transition:', transition);
+    return transition;
+}
+
 @Injectable()
 export class PatternService {
     private baseUrl: string = 'http://localhost:3000/api';
 
     constructor(private http: Http) { }
-
-    
 
     mapPatterns(response: Response): Pattern[] {
         console.log('Mapping patterns');
@@ -62,6 +73,11 @@ export class PatternService {
     mapState(response: Response): State {
         console.log('Mapping state');
         return toState(response.json().data);
+    }
+
+    mapTransitions(response: Response): Transition[] {
+        console.log('Mapping transitions');
+        return response.json().data.map(toTransition);
     }
 
     private getHeaders(): Headers {
@@ -98,6 +114,15 @@ export class PatternService {
             .map(this.mapState)
             .catch(this.handleError);
         return state$;
+    }
+
+    getTransitionsByState(stateId: number): Observable<Transition[]>{
+        console.log('Calling get for transitions of state', stateId);
+        const transitions$ = this.http
+            .get(`${this.baseUrl}/transitions/${stateId}`, {headers: this.getHeaders()})
+            .map(this.mapTransitions)
+            .catch(this.handleError);
+        return transitions$;
     }
 
     // createPattern(pattern: Pattern) {

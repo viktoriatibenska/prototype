@@ -34,9 +34,15 @@ export class PlayComponent implements OnInit {
       .getState(this.stateId)
       .subscribe(s => {
         this.state = s;
-        this.isDataAvailable = true;
 
-        console.log(this.state);
+        this.patternService
+          .getTransitionsByState(this.stateId)
+          .subscribe(t => {
+            this.state.setTransitions(t);
+            this.isDataAvailable = true;
+
+            console.log(this.state);
+          });
       });
   }
 
