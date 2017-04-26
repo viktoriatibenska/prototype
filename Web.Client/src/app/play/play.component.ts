@@ -15,35 +15,50 @@ export class PlayComponent implements OnInit {
   public state: State = null;
   stateId: number;
   public isDataAvailable: boolean = false;
+  public isTransitionsEmpty: boolean = false;
 
   constructor(
     private patternService: PatternService,
     private router: Router,
-    private route: ActivatedRoute
+    private _route: ActivatedRoute
   ) {
-    this.route.params.subscribe(params => {
-      this.stateId = +params['stateId'];
-      console.log('Constructor',this.stateId);
-    });
+    this.isDataAvailable = false;
+    this.isTransitionsEmpty = false;
   }
 
   ngOnInit() {
-    console.log('On init',this.stateId);
+    this._route.params.forEach(params => {
+      this.stateId = +params['stateId'];
 
-    this.patternService
-      .getState(this.stateId)
-      .subscribe(s => {
-        this.state = s;
+      this.patternService
+        .getState(this.stateId)
+        .subscribe(s => {
+          this.state = s;
 
-        this.patternService
-          .getTransitionsByState(this.stateId)
-          .subscribe(t => {
-            this.state.setTransitions(t);
-            this.isDataAvailable = true;
+          this.patternService
+            .getTransitionsByState(this.stateId)
+            .subscribe(t => {
+              this.state.setTransitions(t);
+              this.isDataAvailable = true;
 
-            console.log(this.state);
-          });
-      });
+              if (this.state.transitions.length === 0){
+                console.log("No transitions");
+                this.isTransitionsEmpty = true;
+              }
+
+              console.log(this.state);
+            });
+        });
+    });
+
+    
   }
 
+  switchState(id: number) {
+    this.router.navigate(['/play', id]);
+  }
+
+  finish() {
+    this.router.navigate(['/browse']);
+  }
 }

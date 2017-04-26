@@ -5,7 +5,11 @@
     </div>
 
     <div class="transitions" *ngFor="let transition of state.transitions">
-      <a><div class="well">{{transition.description}}</div></a>
+      <a (click)="switchState(transition.stateToId)"><div class="well">{{transition.description}}</div></a>
+    </div>
+
+    <div *ngIf="isTransitionsEmpty" class="transitions">
+      <a (click)="finish()"><div class="well">Finish</div></a>
     </div>
   </div>
 </div>
