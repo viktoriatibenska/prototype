@@ -18,7 +18,8 @@ module.exports = {
 	createPattern: createPattern,
 	updatePattern: updatePattern,
 	removePattern: removePattern,
-  getSingleState: getSingleState
+  getSingleState: getSingleState,
+  getAllTransitionsOfState: getAllTransitionsOfState
 };
 
 function getAllPatterns(req, res, next) {
@@ -67,6 +68,22 @@ function getSingleState(req, res, next) {
       return next(err);
     });
 }
+
+function getAllTransitionsOfState(req, res, next) {
+  var stateID = parseInt(req.params.id);
+	db.any('select * from transition where state_from_id = $1', stateID)
+	.then(function (data) {
+		res.status(200)
+			.json({
+				status: 'success',
+				data: data,
+				message: 'Retrieved ALL transitions of state'
+			});
+	})
+	.catch(function (err) {
+		return next(err);
+	});
+};
 
 function createPattern(req, res, next) {
   db.none('insert into pattern(name, context)' +
