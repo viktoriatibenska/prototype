@@ -2,14 +2,14 @@
 
   <!-- We'll add our form controls here -->
   <div>
-    <label>Name</label>
+    <label for="name">Name</label>
     <input type="text" class="form-control" formControlName="name">
     <small [hidden]="patternDetailForm.controls.name.valid || (patternDetailForm.controls.name.pristine && !submitted)">
         Name is required (minimum 5 characters).
     </small>
   </div>
 
-  <div>
+  <!--<div>
     <label for="context">Context</label>
     <textarea class="form-control" rows="5" id="context" formControlName="context"></textarea>
     <small [hidden]="patternDetailForm.controls.context.valid || (patternDetailForm.controls.context.pristine && !submitted)">
@@ -39,7 +39,7 @@
     <small [hidden]="patternDetailForm.controls.discussion.valid || (patternDetailForm.controls.discussion.pristine && !submitted)">
         Discussion is required.
     </small>
-  </div>
+  </div>-->
 
   <div>
     <label for="patlet">Patlet</label>

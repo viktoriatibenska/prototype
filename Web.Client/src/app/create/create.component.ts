@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router'
 
 import { Pattern } from '../objects/pattern';
+import { PatternService } from '../pattern.service'
 
 @Component({
   selector: 'app-create',
@@ -14,15 +16,19 @@ export class CreateComponent implements OnInit {
   public submitted: boolean;
   public events: any[] = [];
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(
+    private _fb: FormBuilder,
+    private patternService: PatternService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.patternDetailForm = this._fb.group({
       name: ['', [<any>Validators.required, <any>Validators.minLength(5)]],
-      context: ['', <any>Validators.required],
-      forces: ['', <any>Validators.required],
-      solution: ['', <any>Validators.required],
-      discussion: ['', <any>Validators.required],
+      // context: ['', <any>Validators.required],
+      // forces: ['', <any>Validators.required],
+      // solution: ['', <any>Validators.required],
+      // discussion: ['', <any>Validators.required],
       patlet: ['', <any>Validators.required],
     });
   }
@@ -31,6 +37,15 @@ export class CreateComponent implements OnInit {
     this.submitted = true;
 
     console.log(model, isValid);
+
+    if (isValid) {
+      this.patternService
+        .createPattern(model)
+        .subscribe(() => {
+          this.router.navigate(['/browse']);
+          console.log('Create pattern OK');
+        });
+    }
   }
 
 }

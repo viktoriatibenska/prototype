@@ -86,8 +86,8 @@ function getAllTransitionsOfState(req, res, next) {
 };
 
 function createPattern(req, res, next) {
-  db.none('insert into pattern(name, context)' +
-      'values(${name}, ${context})',
+  db.none('insert into pattern(name, patlet)' +
+      'values(${name}, ${patlet})',
     req.body)
     .then(function () {
       res.status(200)

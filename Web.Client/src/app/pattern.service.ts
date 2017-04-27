@@ -125,11 +125,13 @@ export class PatternService {
         return transitions$;
     }
 
-    // createPattern(pattern: Pattern) {
-    //     console.log('Calling create for pattern');
-    //     this.http.post(`${this.baseUrl}/pattern`,
-    //         {
-                
-    //         }).catch(this.handleError);
-    // }
+    createPattern(pattern: Pattern): Observable<void> {
+        console.log('Calling create for pattern');
+        return this.http
+            .post(`${this.baseUrl}/pattern`, {
+                'name': pattern.name,
+                'patlet': pattern.patlet    
+            })
+            .catch(this.handleError);
+    }
 }
