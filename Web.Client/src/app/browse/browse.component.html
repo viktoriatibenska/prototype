@@ -19,16 +19,16 @@
           <a class="panel-right" *ngIf="pattern.isPublished" tooltip="Pattern is published. To cancel publication click here.">
             <span class="glyphicon glyphicon-ok"></span>
           </a>
-          <a class="panel-right" *ngIf="!pattern.isPublished" tooltip="Pattern is not published. To do so click here.">
+          <!--<a class="panel-right" *ngIf="!pattern.isPublished" tooltip="Pattern is not published. To do so click here.">
             <span class="glyphicon glyphicon-remove"></span>
-          </a>
+          </a>-->
           <a class="panel-right" tooltip="Edit">
             <span class="glyphicon glyphicon-pencil"></span>
           </a>
           <a class="panel-right" tooltip="Delete" (click)="deletePattern(pattern.id)">
             <span class="glyphicon glyphicon-trash"></span>
           </a>
-          <a class="panel-right icon" tooltip="Design pattern gameplay scenario">
+          <a class="panel-right icon" routerLink="/design" tooltip="Design pattern gameplay scenario">
             <img src="src/resources/diagram-icon2.svg">
           </a>
           <button type="button" class="panel-right btn btn-default play-btn" (click)="onPlayBtn(pattern.primaryVariation.startStateId)" [disabled]="pattern.primaryVariation.startStateId === null">Play</button>

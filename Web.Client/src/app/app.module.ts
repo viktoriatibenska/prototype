@@ -11,6 +11,8 @@ import { AccordionModule } from 'ng2-bootstrap/accordion';
 import { RatingModule } from 'ng2-bootstrap/rating';
 import { TooltipModule } from 'ng2-bootstrap/tooltip';
 
+import {  } from 'jointjs'
+
 import { PatternService } from './pattern.service';
 import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
@@ -18,7 +20,7 @@ import { AboutComponent } from './about/about.component';
 import { CreateComponent } from './create/create.component';
 import { BrowseComponent } from './browse/browse.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
-import { SignUpComponent } from './sign-up/sign-up.component';
+import { DesignComponent } from './design/design.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { PlayComponent } from './play/play.component';
 
@@ -29,7 +31,7 @@ import { PlayComponent } from './play/play.component';
     AboutComponent,
     CreateComponent,
     BrowseComponent,
-    SignUpComponent,
+    DesignComponent,
     LogInComponent,
     PlayComponent
   ],
