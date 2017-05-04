@@ -86,18 +86,30 @@ function getAllTransitionsOfState(req, res, next) {
 };
 
 function createPattern(req, res, next) {
-  db.none('insert into pattern(name, patlet)' +
-      'values(${name}, ${patlet})',
-    req.body)
-    .then(function () {
-      res.status(200)
-        .json({
-          status: 'success',
-          message: 'Inserted one pattern'
+  db.one('INSERT INTO pattern(name, patlet, is_published) VALUES(${name}, ${patlet}, False) RETURNING id', req.body)
+    .then(patternData => {
+      db.one('INSERT INTO variation(name, pattern_id) VALUES(\'Initial variation\', $1) RETURNING id AS vid, pattern_id AS pid', patternData.id)
+        .then(variationData => {
+          console.log(variationData.pid, variationData.vid);
+          db.none(`UPDATE pattern SET primary_variation_id = ${variationData.vid} WHERE id = ${variationData.pid}`)
+            .then(() => {
+              res.status(200)
+              .json({
+                status: 'success',
+                message: 'Inserted one pattern with variation'
+              });
+            })
+            .catch(error => {
+              console.log(variationData)
+              return next(error);
+            });
+        })
+        .catch(error => {
+          return next(error);    
         });
     })
-    .catch(function (err) {
-      return next(err);
+    .catch(error => {
+      return next(error);
     });
 }
 
