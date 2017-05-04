@@ -1,12 +1,16 @@
 ﻿INSERT INTO pattern(name, patlet, is_published) VALUES('Test pattern 1', 'Test paltet 1', False) RETURNING id
 
-INSERT INTO variation(name, pattern_id) VALUES('Initial variation', 6) RETURNING id
+INSERT INTO variation(name, pattern_id) VALUES('Initial variation', 8) RETURNING id as vid, pattern_id as pid
 
 UPDATE pattern SET primary_variation_id = 6 WHERE id = 6
 
 SELECT p.id as pattern_pk_id, v.id as variation_pk_id, p.name as pattern_name, v.name as variation_name, * FROM pattern as p join variation as v ON p.primary_variation_id = v.id
 
-select * from pattern
+select * from pattern as p left outer join variation as v on p.id = v.pattern_id
+select * from pattern;
+select * from variation;
+
+delete from pattern where id = 17
 
 insert into state(name, description, variation_id) values('Introduction', 'After one of those meetings in which new functionality is being agreed upon, you find yourself carrying out the analysis of the prerequisites to extend the existing architecture. The architecture has to accommodate the new functionality. 
 To meet the requirements, you decide to study several versions of the frameworks used in implementation. At the same time, your mind starts shaping a vision of the architecture. 
@@ -39,15 +43,4 @@ insert into state(name, description, variation_id) values('State 9', $$Developer
 insert into transition(state_from_id, state_to_id, name, description) values(7, 9, 'T11 Override the architecture document and leave the implementation to the developer', 'propose a solution overriding the architecture document and leave the implementation to the developer.')
 
 select * from transition
-
-
-
-
-
-
-
-
-
-
-
 

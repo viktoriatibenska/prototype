@@ -42,7 +42,10 @@ export class CreateComponent implements OnInit {
       this.patternService
         .createPattern(model)
         .subscribe(() => {
+          this.patternDetailForm.reset();
+          
           this.router.navigate(['/browse']);
+          
           console.log('Create pattern OK');
         });
     }
