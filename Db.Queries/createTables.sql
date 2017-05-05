@@ -77,3 +77,7 @@ ALTER TABLE variation
 	ADD COLUMN pattern_id int references pattern(id) ON DELETE CASCADE,
 	ADD COLUMN start_state_id int references state(id),
 	ADD COLUMN created_by_id int references pattern_creator(id);
+
+ALTER TABLE state
+	ADD COLUMN height real,
+	ADD COLUMN width real;

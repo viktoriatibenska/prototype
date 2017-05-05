@@ -10,7 +10,7 @@ router.post('/api/pattern', db.createPattern);
 router.put('/api/pattern/:id', db.updatePattern);
 router.delete('/api/pattern/:id', db.removePattern);
 
-router.get('/api/state/:id', db.getSingleState);
+router.get('/api/states/:variationid', db.getSingleState);
 router.get('/api/transitions/:id', db.getAllTransitionsOfState);
 
 module.exports = router;
