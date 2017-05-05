@@ -21,6 +21,7 @@ module.exports = {
   getSingleState: getSingleState,
   getAllTransitionsOfState: getAllTransitionsOfState,
   getAllStatesByVariation: getAllStatesByVariation,
+  getAllTransitionsByVariation: getAllTransitionsByVariation,
 };
 
 function getAllPatterns(req, res, next) {
@@ -79,6 +80,22 @@ function getAllStatesByVariation(req, res, next) {
 				status: 'success',
 				data: data,
 				message: 'Retrieved ALL states by variation'
+			});
+	})
+	.catch(function (err) {
+		return next(err);
+	});
+}
+
+function getAllTransitionsByVariation(req, res, next) {
+  var variationId = parseInt(req.params.variationId);
+  db.any('SELECT t.*, s.variation_id FROM transition AS t JOIN state AS s ON s.id = t.state_from_id WHERE s.variation_id = $1', variationId)
+	.then(function (data) {
+		res.status(200)
+			.json({
+				status: 'success',
+				data: data,
+				message: 'Retrieved ALL transitions by variation'
 			});
 	})
 	.catch(function (err) {

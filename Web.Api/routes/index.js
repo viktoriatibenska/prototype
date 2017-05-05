@@ -14,5 +14,6 @@ router.get('/api/states/:id', db.getSingleState);
 router.get('/api/transitions/:id', db.getAllTransitionsOfState);
 
 router.get('/api/state/:variationId', db.getAllStatesByVariation);
+router.get('/api/transition/:variationId', db.getAllTransitionsByVariation);
 
 module.exports = router;
