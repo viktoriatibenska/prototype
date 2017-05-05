@@ -14,6 +14,7 @@ export class DesignComponent implements OnInit {
 	constructor() { }
 
 	ngOnInit() {
+		let breakWidth = 120;
 		let graph = new joint.dia.Graph;
 
 		let paper = new joint.dia.Paper({
@@ -49,7 +50,7 @@ export class DesignComponent implements OnInit {
 				position: { x: 150, y: 100 },
 				size: { width: 160, height: 100 },
 				name: "state 1",
-				events: [joint.util.breakText('Creating the architecture document',  {width: 110})],
+				events: [joint.util.breakText('Creating the architecture document',  {width: breakWidth})],
 				attrs: {
 					'.uml-state-body': {
 						fill: 'rgba(48, 208, 198, 0.1)',
@@ -66,7 +67,7 @@ export class DesignComponent implements OnInit {
 				position: { x: 150, y: 280 },
 				size: { width: 160, height: 100 },
 				name: "state 2",
-				events: [joint.util.breakText("Making some implementation according to the architecture document",  {width: 110})],
+				events: [joint.util.breakText("Making some implementation according to the architecture document",  {width: breakWidth})],
 				attrs: {
 					'.uml-state-body': {
 						fill: 'rgba(48, 208, 198, 0.1)',
@@ -83,7 +84,7 @@ export class DesignComponent implements OnInit {
 				position: { x: 20, y: 480 },
 				size: { width: 160, height: 100 },
 				name: "state 3",
-				events: [joint.util.breakText("Solving the problems with implementation",  {width: 110})],
+				events: [joint.util.breakText("Solving the problems with implementation",  {width: breakWidth})],
 				attrs: {
 					'.uml-state-body': {
 						fill: 'rgba(48, 208, 198, 0.1)',
@@ -100,7 +101,7 @@ export class DesignComponent implements OnInit {
 				position: { x: 250, y: 480 },
 				size: { width: 160, height: 100 },
 				name: "state 4",
-				events: [joint.util.breakText("Adapting the architecture document to correspond to the implementation",  {width: 110})],
+				events: [joint.util.breakText("Adapting the architecture document to correspond to the implementation",  {width: breakWidth})],
 				attrs: {
 					'.uml-state-body': {
 						fill: 'rgba(48, 208, 198, 0.1)',
@@ -117,7 +118,7 @@ export class DesignComponent implements OnInit {
 				position: { x: 450, y: 100 },
 				size: { width: 160, height: 100 },
 				name: "state 5",
-				events: [joint.util.breakText("Discussing the implementation problems with the developer",  {width: 110})],
+				events: [joint.util.breakText("Discussing the implementation problems with the developer",  {width: breakWidth})],
 				attrs: {
 					'.uml-state-body': {
 						fill: 'rgba(48, 208, 198, 0.1)',
@@ -134,7 +135,7 @@ export class DesignComponent implements OnInit {
 				position: { x: 450, y: 250 },
 				size: { width: 160, height: 100 },
 				name: "state 6",
-				events: [joint.util.breakText("Resolving the implementation problems together with developer",  {width: 110})],
+				events: [joint.util.breakText("Resolving the implementation problems together with developer",  {width: breakWidth})],
 				attrs: {
 					'.uml-state-body': {
 						fill: 'rgba(48, 208, 198, 0.1)',
@@ -151,7 +152,7 @@ export class DesignComponent implements OnInit {
 				position: { x: 450, y: 400 },
 				size: { width: 160, height: 100 },
 				name: "state 7",
-				events: [joint.util.breakText('Deciding how to deal with the errors in the architecture document',  {width: 110})],
+				events: [joint.util.breakText('Deciding how to deal with the errors in the architecture document',  {width: breakWidth})],
 				attrs: {
 					'.uml-state-body': {
 						fill: 'rgba(48, 208, 198, 0.1)',
@@ -168,7 +169,7 @@ export class DesignComponent implements OnInit {
 				position: { x: 450, y: 550 },
 				size: { width: 160, height: 100 },
 				name: "state 8",
-				events: [joint.util.breakText("Gaining expertise for future architectural decisions",  {width: 110})],
+				events: [joint.util.breakText("Gaining expertise for future architectural decisions",  {width: breakWidth})],
 				attrs: {
 					'.uml-state-body': {
 						fill: 'rgba(48, 208, 198, 0.1)',
@@ -185,7 +186,7 @@ export class DesignComponent implements OnInit {
 				position: { x: 750, y: 250 },
 				size: { width: 160, height: 100 },
 				name: "state 9",
-				events: [joint.util.breakText("Losing insight into the implementation restrictions",  {width: 110})],
+				events: [joint.util.breakText("Losing insight into the implementation restrictions",  {width: breakWidth})],
 				attrs: {
 					'.uml-state-body': {
 						fill: 'rgba(48, 208, 198, 0.1)',
@@ -214,13 +215,6 @@ export class DesignComponent implements OnInit {
 
 		};
 		_.each(states, function (c) { graph.addCell(c); });
-
-		var linkAttrs = {
-			'fill': 'none',
-			'stroke-linejoin': 'round',
-			'stroke-width': '2',
-			'stroke': '#4b4a67'
-		};
 
 		var transitons = [
 			new uml.Transition({
