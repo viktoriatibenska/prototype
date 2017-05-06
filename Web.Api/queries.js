@@ -22,6 +22,8 @@ module.exports = {
   getAllTransitionsOfState: getAllTransitionsOfState,
   getAllStatesByVariation: getAllStatesByVariation,
   getAllTransitionsByVariation: getAllTransitionsByVariation,
+  removeState: removeState,
+  removeTransition: removeTransition,
 };
 
 function getAllPatterns(req, res, next) {
@@ -104,7 +106,7 @@ function getAllTransitionsByVariation(req, res, next) {
 }
 
 function getAllTransitionsOfState(req, res, next) {
-  var stateID = parseInt(req.params.id);
+  var stateID = parseInt(req.params.stateId);
 	db.any('select * from transition where state_from_id = $1', stateID)
 	.then(function (data) {
 		res.status(200)
@@ -179,4 +181,38 @@ function removePattern(req, res, next) {
       return next(err);
     });
 
-};
+  };
+
+  function removeState(req, res, next) { 
+    var stateId = parseInt(req.params.id);
+    db.result('delete from state where id = $1', stateId)
+      .then(function (result) {
+        /* jshint ignore:start */
+        res.status(200)
+          .json({
+            status: 'success',
+            message: `Removed ${result.rowCount} state`
+          });
+        /* jshint ignore:end */
+      })
+      .catch(function (err) {
+        return next(err);
+      });
+  };
+
+  function removeTransition(req, res, next) { 
+    var transitionId = parseInt(req.params.id);
+    db.result('delete from transition where id = $1', transitionId)
+      .then(function (result) {
+        /* jshint ignore:start */
+        res.status(200)
+          .json({
+            status: 'success',
+            message: `Removed ${result.rowCount} transition`
+          });
+        /* jshint ignore:end */
+      })
+      .catch(function (err) {
+        return next(err);
+      });
+  };

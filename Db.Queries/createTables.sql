@@ -38,8 +38,8 @@ CREATE TABLE state(
 
 CREATE TABLE transition(
 	id serial UNIQUE PRIMARY KEY NOT NULL,
-	state_from_id int references state(id),
-	state_to_id int references state(id),
+	state_from_id int references state(id) ON DELETE CASCADE,
+	state_to_id int references state(id) ON DELETE CASCADE,
 	name varchar(200),
 	description text
 );
