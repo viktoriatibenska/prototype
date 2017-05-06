@@ -41,7 +41,9 @@ function toState(r: any): State {
         r.name,
         r.description,
         r.positionX,
-        r.positionY
+        r.positionY,
+        r.width,
+        r.height
     );
     console.log('Parsed state:', state);
     return state;
@@ -119,7 +121,7 @@ export class PatternService {
     getTransitionsByState(stateId: number): Observable<Transition[]>{
         console.log('Calling get for transitions of state', stateId);
         const transitions$ = this.http
-            .get(`${this.baseUrl}/transitions/${stateId}`, {headers: this.getHeaders()})
+            .get(`${this.baseUrl}/transition/${stateId}`, {headers: this.getHeaders()})
             .map(this.mapTransitions)
             .catch(this.handleError);
         return transitions$;

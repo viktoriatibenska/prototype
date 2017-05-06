@@ -7,6 +7,8 @@ export class State {
     description: string;
     positionX: number;
     positionY: number;
+    width: number;
+    height: number;
     
     transitions: Transition[];
 
@@ -16,7 +18,9 @@ export class State {
         name: string,
         description: string,
         positionX: number,
-        positionY: number
+        positionY: number,
+        width: number,
+        height: number
     ){
         this.id = id;
         this.variationId = variationId;
@@ -24,6 +28,8 @@ export class State {
         this.description = description;
         this.positionX = positionX;
         this.positionY = positionY;
+        this.width = width;
+        this.height = height;
     }
 
     setTransitions(transitions: Transition[]){
