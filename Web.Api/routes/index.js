@@ -12,9 +12,11 @@ router.delete('/api/pattern/:id', db.removePattern);
 router.get('/api/state/:id', db.getSingleState);
 router.get('/api/states/:variationId', db.getAllStatesByVariation);
 router.delete('/api/state/:id', db.removeState);
+router.put('/api/state/:id', db.updateState);
 
 router.get('/api/transition/:stateId', db.getAllTransitionsOfState);
 router.get('/api/transitions/:variationId', db.getAllTransitionsByVariation);
 router.delete('/api/transition/:id', db.removeTransition);
+router.put('/api/transition/:id', db.updateTransition);
 
 module.exports = router;

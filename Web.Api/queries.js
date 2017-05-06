@@ -24,6 +24,8 @@ module.exports = {
   getAllTransitionsByVariation: getAllTransitionsByVariation,
   removeState: removeState,
   removeTransition: removeTransition,
+  updateState: updateState,
+  updateTransition: updateTransition,
 };
 
 function getAllPatterns(req, res, next) {
@@ -151,13 +153,57 @@ function createPattern(req, res, next) {
 
 
 function updatePattern(req, res, next) {
-  db.none('update pattern set name=$1, context=$2 where id=$3',
-    [req.body.name, req.body.context, parseInt(req.params.id)])
+  db.none('update pattern set name=$1, patlet=$2 where id=$3',
+    [req.body.name, req.body.patlet, parseInt(req.params.id)])
     .then(function () {
       res.status(200)
         .json({
           status: 'success',
           message: 'Updated pattern'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+};
+
+function updateState(req, res, next) {
+  db.none('update state set name=$1, description=$2, position_x=$3, position_y=$4, width=$5, height=$6 where id=$7',
+          [
+            req.body.name,
+            req.body.description,
+            parseFloat(req.body.position_x),
+            parseFloat(req.body.position_y),
+            parseFloat(req.body.width),
+            parseFloat(req.body.height),
+            parseInt(req.params.id)
+          ])
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Updated state'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+};
+
+function updateTransition(req, res, next) {
+  db.none('update transition set name=$1, description=$2, state_from_id=$3, state_to_id=$4 where id=$5',
+          [
+            req.body.name,
+            req.body.description,
+            parseInt(req.body.state_from_id),
+            parseInt(req.body.state_to_id),
+            parseInt(req.params.id)
+          ])
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Updated transition'
         });
     })
     .catch(function (err) {
