@@ -26,6 +26,9 @@ module.exports = {
   removeTransition: removeTransition,
   updateState: updateState,
   updateTransition: updateTransition,
+  createState: createState,
+  createTransition: createTransition,
+  setVariationStartState: setVariationStartState,
 };
 
 function getAllPatterns(req, res, next) {
@@ -151,6 +154,50 @@ function createPattern(req, res, next) {
     });
 }
 
+function createState(req, res, next) {
+  console.log("Creating state");
+  db.none('INSERT INTO state(name, description, position_x, position_y, width, height, variation_id) VALUES($1, $2, $3, $4, $5, $6, $7)', 
+          [
+            req.body.name,
+            req.body.description,
+            parseFloat(req.body.position_x),
+            parseFloat(req.body.position_y),
+            parseFloat(req.body.width),
+            parseFloat(req.body.height),
+            parseInt(req.body.variation_id)
+          ])
+    .then(() => {
+      res.status(200)
+      .json({
+        status: 'success',
+        message: 'Inserted one state'
+      });
+    })
+    .catch(error => {
+      return next(error);
+    });
+}
+
+function createTransition(req, res, next) {
+  console.log("Creating transition");
+  db.none('INSERT INTO transition(name, description, state_from_id, state_to_id) VALUES($1, $2, $3, $4)',
+          [
+            req.body.name,
+            req.body.description,
+            parseInt(req.body.state_from_id),
+            parseInt(req.body.state_to_id)
+          ])
+    .then(() => {
+      res.status(200)
+      .json({
+        status: 'success',
+        message: 'Inserted one transition'
+      });
+    })
+    .catch(error => {
+      return next(error);
+    });
+}
 
 function updatePattern(req, res, next) {
   db.none('update pattern set name=$1, patlet=$2 where id=$3',
@@ -189,6 +236,24 @@ function updateState(req, res, next) {
       return next(err);
     });
 };
+
+function setVariationStartState(req, res, next) {
+  db.none('update variation set start_state_id=$1 where id=$2',
+          [
+            parseInt(req.body.start_state_id),
+            parseInt(req.params.id)
+          ])
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Start state set'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
 
 function updateTransition(req, res, next) {
   db.none('update transition set name=$1, description=$2, state_from_id=$3, state_to_id=$4 where id=$5',
