@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router'
+
 import * as jQuery from 'jquery';
 import * as _ from 'lodash';
 import * as $ from 'backbone';
 const joint = require('../../../node_modules/jointjs/dist/joint.js');
+
+import { PatternService } from '../pattern.service';
+import { State } from '../objects/state';
+import { Transition } from '../objects/transition';
 
 @Component({
 	selector: 'app-design',
@@ -11,9 +17,35 @@ const joint = require('../../../node_modules/jointjs/dist/joint.js');
 })
 export class DesignComponent implements OnInit {
 
-	constructor() { }
+	public states: State[] = [];
+	public transitions: Transition[] = [];
+	variationId: number;
+
+	constructor(
+		private patternService: PatternService,
+		private router: Router,
+    	private _route: ActivatedRoute
+	) { }
 
 	ngOnInit() {
+		this.variationId = parseInt(this._route.snapshot.params['variationId']);
+		this.patternService
+			.getStates(this.variationId)
+			.subscribe(states => {
+				this.states = states;
+
+				console.log('States get success', this.states);
+			});
+
+		this.patternService
+			.getTransitionsByVariation(this.variationId)
+			.subscribe(transitions => {
+				this.transitions = transitions;
+
+				console.log('Transitions get success', this.transitions);
+			});
+
+
 		let breakWidth = 120;
 		let graph = new joint.dia.Graph;
 

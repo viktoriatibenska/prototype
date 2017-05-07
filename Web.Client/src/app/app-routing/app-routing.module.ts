@@ -26,7 +26,7 @@ const routes: Routes = [
         component: AboutComponent
     },
     {
-        path: 'design',
+        path: 'design/:variationId',
         component: DesignComponent
     },
     {

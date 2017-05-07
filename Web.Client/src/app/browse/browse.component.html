@@ -28,7 +28,7 @@
           <a class="panel-right" tooltip="Delete" (click)="deletePattern(pattern.id)">
             <span class="glyphicon glyphicon-trash"></span>
           </a>
-          <a class="panel-right icon" routerLink="/design" tooltip="Design pattern gameplay scenario">
+          <a class="panel-right icon" (click)="designScenario(pattern.primaryVariation.id)" tooltip="Design pattern gameplay scenario">
             <img src="src/resources/diagram-icon2.svg">
           </a>
           <button type="button" class="panel-right btn btn-default play-btn" (click)="onPlayBtn(pattern.primaryVariation.startStateId)" [disabled]="pattern.primaryVariation.startStateId === null">Play</button>

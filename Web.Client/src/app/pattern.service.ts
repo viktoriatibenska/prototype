@@ -37,6 +37,11 @@ export class PatternService {
         return toState(response.json().data);
     }
 
+    mapStates(response: Response): State[]{
+        console.log('Mapping states');
+        return response.json().data.map(toState);
+    }
+
     mapTransitions(response: Response): Transition[] {
         console.log('Mapping transitions');
         return response.json().data.map(toTransition);
@@ -116,4 +121,21 @@ export class PatternService {
         return transitions$;
     }
 
+    getStates(variationId: number): Observable<State[]>{
+        console.log('Calling get for states');
+        const states$ = this.http
+            .get(`${this.baseUrl}/states/${variationId}`, {headers: this.getHeaders()})
+            .map(this.mapStates)
+            .catch(this.handleError);
+        return states$;
+    }
+
+    getTransitionsByVariation(variationId: number): Observable<Transition[]>{
+        console.log('Calling get for transitions by variation');
+        const transitions$ = this.http
+            .get(`${this.baseUrl}/transitions/${variationId}`, {headers: this.getHeaders()})
+            .map(this.mapTransitions)
+            .catch(this.handleError);
+        return transitions$;
+    }
 }
