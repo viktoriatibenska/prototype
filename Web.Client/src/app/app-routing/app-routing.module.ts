@@ -18,6 +18,10 @@ const routes: Routes = [
         component: CreateComponent
     },
     {
+        path: 'create/:id',
+        component: CreateComponent
+    },
+    {
         path: 'about',
         component: AboutComponent
     },

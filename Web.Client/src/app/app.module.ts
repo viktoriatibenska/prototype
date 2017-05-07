@@ -11,8 +11,6 @@ import { AccordionModule } from 'ng2-bootstrap/accordion';
 import { RatingModule } from 'ng2-bootstrap/rating';
 import { TooltipModule } from 'ng2-bootstrap/tooltip';
 
-import {  } from 'jointjs'
-
 import { PatternService } from './pattern.service';
 import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';

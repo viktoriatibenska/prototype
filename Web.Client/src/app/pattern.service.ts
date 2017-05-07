@@ -9,57 +9,12 @@ import { Variation } from './objects/variation';
 import { State } from './objects/state';
 import { Transition } from './objects/transition';
 
-function toPattern(r: any): Pattern {
-    let pattern = new Pattern(
-        r.pattern_pk_id,
-        r.primary_variation_id,
-        new Variation(
-            r.variation_pk_id,
-            r.start_state_id,
-            r.created_by_id,
-            r.variation_name,
-            r.note,
-            r.created_time
-        ),
-        r.pattern_name,
-        r.context,
-        r.forces,
-        r.solution,
-        r.discussion,
-        r.patlet,
-        r.rating,
-        r.is_published
-    );
-    console.log('Parsed pattern:', pattern);
-    return pattern;
-}
-
-function toState(r: any): State {
-    let state = new State(
-        r.id,
-        r.variation_id,
-        r.name,
-        r.description,
-        r.positionX,
-        r.positionY,
-        r.width,
-        r.height
-    );
-    console.log('Parsed state:', state);
-    return state;
-}
-
-function toTransition(r: any): Transition {
-    let transition = new Transition(
-        r.id,
-        r.name,
-        r.description,
-        r.state_from_id,
-        r.state_to_id
-    );
-    console.log('Parsed transition:', transition);
-    return transition;
-}
+import { 
+    toPattern,
+    toPatternWithVariation,
+    toState,
+    toTransition
+} from './json-conversion-functions';
 
 @Injectable()
 export class PatternService {
@@ -69,9 +24,14 @@ export class PatternService {
 
     mapPatterns(response: Response): Pattern[] {
         console.log('Mapping patterns');
-        return response.json().data.map(toPattern);
+        return response.json().data.map(toPatternWithVariation);
     }
     
+    mapPattern(response: Response): Pattern {
+        console.log('Mapping pattern');
+        return toPattern(response.json().data);
+    }
+
     mapState(response: Response): State {
         console.log('Mapping state');
         return toState(response.json().data);
@@ -102,11 +62,40 @@ export class PatternService {
         return patterns$;
     }
 
+    getPattern(id: number): Observable<Pattern> {
+        console.log('Getting pattern', id);
+        const pattern$ = this.http
+            .get(`${this.baseUrl}/pattern/${id}`, {headers: this.getHeaders()})
+            .map(this.mapPattern)
+            .catch(this.handleError);
+        return pattern$;
+    }
+
     deletePattern(id: number): Observable<void> {
         console.log('Calling delete for pattern', id);
         return this.http
                     .delete(`${this.baseUrl}/pattern/${id}`)
                     .catch(this.handleError);
+    }
+
+    createPattern(pattern: Pattern): Observable<void> {
+        console.log('Calling create for pattern');
+        return this.http
+            .post(`${this.baseUrl}/pattern`, {
+                'name': pattern.name,
+                'patlet': pattern.patlet    
+            })
+            .catch(this.handleError);
+    }
+
+    updatePattern(pattern: Pattern): Observable<void> {
+        console.log('Calling update for pattern', pattern.id);
+        return this.http
+            .put(`${this.baseUrl}/pattern/${pattern.id}`, {
+                'name': pattern.name,
+                'patlet': pattern.patlet    
+            })
+            .catch(this.handleError);
     }
 
     getState(id: number): Observable<State>{
@@ -127,13 +116,4 @@ export class PatternService {
         return transitions$;
     }
 
-    createPattern(pattern: Pattern): Observable<void> {
-        console.log('Calling create for pattern');
-        return this.http
-            .post(`${this.baseUrl}/pattern`, {
-                'name': pattern.name,
-                'patlet': pattern.patlet    
-            })
-            .catch(this.handleError);
-    }
 }

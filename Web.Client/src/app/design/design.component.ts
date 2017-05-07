@@ -32,6 +32,16 @@ export class DesignComponent implements OnInit {
 			'stroke-width': '2',
 			'stroke': '#4b4a67'
 		};
+		var attributes = {
+			'.uml-state-body': {
+				fill: 'rgba(48, 208, 198, 0.1)',
+				stroke: 'rgba(48, 208, 198, 0.5)',
+				'stroke-width': 1.5
+			},
+			'.uml-state-separator': {
+				stroke: 'rgba(48, 208, 198, 0.4)'
+			}
+		}
 
 		var states = {
 
@@ -51,16 +61,7 @@ export class DesignComponent implements OnInit {
 				size: { width: 160, height: 100 },
 				name: "state 1",
 				events: [joint.util.breakText('Creating the architecture document',  {width: breakWidth})],
-				attrs: {
-					'.uml-state-body': {
-						fill: 'rgba(48, 208, 198, 0.1)',
-						stroke: 'rgba(48, 208, 198, 0.5)',
-						'stroke-width': 1.5
-					},
-					'.uml-state-separator': {
-						stroke: 'rgba(48, 208, 198, 0.4)'
-					}
-				}
+				attrs: attributes
 			}),
 
 			s2: new uml.State({
@@ -68,16 +69,7 @@ export class DesignComponent implements OnInit {
 				size: { width: 160, height: 100 },
 				name: "state 2",
 				events: [joint.util.breakText("Making some implementation according to the architecture document",  {width: breakWidth})],
-				attrs: {
-					'.uml-state-body': {
-						fill: 'rgba(48, 208, 198, 0.1)',
-						stroke: 'rgba(48, 208, 198, 0.5)',
-						'stroke-width': 1.5
-					},
-					'.uml-state-separator': {
-						stroke: 'rgba(48, 208, 198, 0.4)'
-					}
-				}
+				attrs: attributes
 			}),
 
 			s3: new uml.State({
@@ -85,16 +77,7 @@ export class DesignComponent implements OnInit {
 				size: { width: 160, height: 100 },
 				name: "state 3",
 				events: [joint.util.breakText("Solving the problems with implementation",  {width: breakWidth})],
-				attrs: {
-					'.uml-state-body': {
-						fill: 'rgba(48, 208, 198, 0.1)',
-						stroke: 'rgba(48, 208, 198, 0.5)',
-						'stroke-width': 1.5
-					},
-					'.uml-state-separator': {
-						stroke: 'rgba(48, 208, 198, 0.4)'
-					}
-				}
+				attrs: attributes
 			}),
 
 			s4: new uml.State({
@@ -102,16 +85,7 @@ export class DesignComponent implements OnInit {
 				size: { width: 160, height: 100 },
 				name: "state 4",
 				events: [joint.util.breakText("Adapting the architecture document to correspond to the implementation",  {width: breakWidth})],
-				attrs: {
-					'.uml-state-body': {
-						fill: 'rgba(48, 208, 198, 0.1)',
-						stroke: 'rgba(48, 208, 198, 0.5)',
-						'stroke-width': 1.5
-					},
-					'.uml-state-separator': {
-						stroke: 'rgba(48, 208, 198, 0.4)'
-					}
-				}
+				attrs: attributes
 			}),
 
 			s5: new uml.State({
@@ -119,16 +93,7 @@ export class DesignComponent implements OnInit {
 				size: { width: 160, height: 100 },
 				name: "state 5",
 				events: [joint.util.breakText("Discussing the implementation problems with the developer",  {width: breakWidth})],
-				attrs: {
-					'.uml-state-body': {
-						fill: 'rgba(48, 208, 198, 0.1)',
-						stroke: 'rgba(48, 208, 198, 0.5)',
-						'stroke-width': 1.5
-					},
-					'.uml-state-separator': {
-						stroke: 'rgba(48, 208, 198, 0.4)'
-					}
-				}
+				attrs: attributes
 			}),
 
 			s6: new uml.State({
@@ -136,16 +101,7 @@ export class DesignComponent implements OnInit {
 				size: { width: 160, height: 100 },
 				name: "state 6",
 				events: [joint.util.breakText("Resolving the implementation problems together with developer",  {width: breakWidth})],
-				attrs: {
-					'.uml-state-body': {
-						fill: 'rgba(48, 208, 198, 0.1)',
-						stroke: 'rgba(48, 208, 198, 0.5)',
-						'stroke-width': 1.5
-					},
-					'.uml-state-separator': {
-						stroke: 'rgba(48, 208, 198, 0.4)'
-					}
-				}
+				attrs: attributes
 			}),
 
 			s7: new uml.State({
@@ -153,16 +109,7 @@ export class DesignComponent implements OnInit {
 				size: { width: 160, height: 100 },
 				name: "state 7",
 				events: [joint.util.breakText('Deciding how to deal with the errors in the architecture document',  {width: breakWidth})],
-				attrs: {
-					'.uml-state-body': {
-						fill: 'rgba(48, 208, 198, 0.1)',
-						stroke: 'rgba(48, 208, 198, 0.5)',
-						'stroke-width': 1.5
-					},
-					'.uml-state-separator': {
-						stroke: 'rgba(48, 208, 198, 0.4)'
-					}
-				}
+				attrs: attributes
 			}),
 
 			s8: new uml.State({
@@ -170,16 +117,7 @@ export class DesignComponent implements OnInit {
 				size: { width: 160, height: 100 },
 				name: "state 8",
 				events: [joint.util.breakText("Gaining expertise for future architectural decisions",  {width: breakWidth})],
-				attrs: {
-					'.uml-state-body': {
-						fill: 'rgba(48, 208, 198, 0.1)',
-						stroke: 'rgba(48, 208, 198, 0.5)',
-						'stroke-width': 1.5
-					},
-					'.uml-state-separator': {
-						stroke: 'rgba(48, 208, 198, 0.4)'
-					}
-				}
+				attrs: attributes
 			}),
 
 			s9: new uml.State({
@@ -187,16 +125,7 @@ export class DesignComponent implements OnInit {
 				size: { width: 160, height: 100 },
 				name: "state 9",
 				events: [joint.util.breakText("Losing insight into the implementation restrictions",  {width: breakWidth})],
-				attrs: {
-					'.uml-state-body': {
-						fill: 'rgba(48, 208, 198, 0.1)',
-						stroke: 'rgba(48, 208, 198, 0.5)',
-						'stroke-width': 1.5
-					},
-					'.uml-state-separator': {
-						stroke: 'rgba(48, 208, 198, 0.4)'
-					}
-				}
+				attrs: attributes
 			}),
 
 			se: new uml.EndState({

@@ -70,4 +70,8 @@ export class BrowseComponent implements OnInit {
   onPlayBtn(variationId: number){
     this.router.navigate(['/play', variationId]);
   }
+
+  editPattern(id: number) {
+    this.router.navigate(['/create', id]);
+  }
 }

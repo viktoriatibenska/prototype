@@ -19,10 +19,10 @@
           <a class="panel-right" *ngIf="pattern.isPublished" tooltip="Pattern is published. To cancel publication click here.">
             <span class="glyphicon glyphicon-ok"></span>
           </a>
-          <!--<a class="panel-right" *ngIf="!pattern.isPublished" tooltip="Pattern is not published. To do so click here.">
+          <a class="panel-right" *ngIf="!pattern.isPublished" tooltip="Pattern is not published. To do so click here.">
             <span class="glyphicon glyphicon-remove"></span>
-          </a>-->
-          <a class="panel-right" tooltip="Edit">
+          </a>
+          <a class="panel-right" tooltip="Edit" (click)="editPattern(pattern.id)">
             <span class="glyphicon glyphicon-pencil"></span>
           </a>
           <a class="panel-right" tooltip="Delete" (click)="deletePattern(pattern.id)">
