@@ -157,4 +157,27 @@ export class PatternService {
             .catch(this.handleError);
         return startStateId$;
     }
+
+    setStartState(variationId: number, stateId: number): Observable<void>{
+        console.log('Setting new start state');
+        return this.http
+                   .put(`${this.baseUrl}/variation/setStartState/${variationId}`, {
+                       "start_state_id": stateId
+                   })
+                   .catch(this.handleError)
+    }
+
+    deleteState(id: number): Observable<void> {
+        console.log('Calling delete for state', id);
+        return this.http
+                   .delete(`${this.baseUrl}/state/${id}`)
+                   .catch(this.handleError);
+    }
+
+    deleteTransition(id: number): Observable<void> {
+        console.log('Calling delete for transition', id);
+        return this.http
+                   .delete(`${this.baseUrl}/transition/${id}`)
+                   .catch(this.handleError);
+    }
 }

@@ -7,6 +7,7 @@ import { AboutComponent } from '../about/about.component';
 import { LogInComponent } from '../log-in/log-in.component';
 import { DesignComponent } from '../design/design.component';
 import { PlayComponent } from '../play/play.component';
+import { ScenarioDesignComponent } from '../scenario-design/scenario-design.component'
 
 const routes: Routes = [
     {
@@ -28,6 +29,10 @@ const routes: Routes = [
     {
         path: 'design/:variationId',
         component: DesignComponent
+    },
+    {
+        path: 'design/scenario/:variationId',
+        component: ScenarioDesignComponent
     },
     {
         path: 'login',

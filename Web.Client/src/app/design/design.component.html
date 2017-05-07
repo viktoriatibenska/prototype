@@ -1,15 +1,27 @@
 <div class="row">
   <div class="col-sm-12">
-    <button routerLink="/play/1" type="button" class="btn btn-default" tooltip="Preview gameplay">
+    <button type="button" class="btn btn-default" tooltip="Preview gameplay" (click)="playPattern()">
       <span class="glyphicon glyphicon-play"></span>
     </button>
     
-    <button type="button" class="btn btn-default" tooltip="Add new state">
+    <!--<button type="button" class="btn btn-default" tooltip="Add new state" (click)="addState()">
       <span class="glyphicon glyphicon-plus"></span>
     </button>
 
     <button type="button" class="btn btn-default" tooltip="Add new transition">
       <span class="glyphicon glyphicon-arrow-right"></span>
+    </button>
+
+    <button type="button" class="btn btn-default" tooltip="Remove last state" (click)="removeLast()">
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>-->
+
+    <button type="button" class="btn btn-default" tooltip="Save diagram positions" (click)="saveDiagram()">
+      <span class="glyphicon glyphicon-floppy-disk"></span>
+    </button>
+
+    <button type="button" class="btn btn-default" tooltip="Edit scenario descriptions" (click)="goToEdit()">
+      <span class="glyphicon glyphicon-pencil"></span>
     </button>
   </div>
 </div>

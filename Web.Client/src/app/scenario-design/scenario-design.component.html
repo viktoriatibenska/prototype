@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-sm-12">
+    <button type="button" class="btn btn-default" (click)="addNewState()" tooltip="Add new state">
+      <span class="glyphicon glyphicon-plus"></span>
+    </button>
+  </div>
+</div>
+
+<accordion>
+  <div class="list-item" *ngFor="let state of states">
+    <accordion-group #group [panelClass]="state.id == startStateId ? panelStart : panelDefault">
+      <div accordion-heading>
+        <i class="pull-left float-xs-left glyphicon"
+         [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+        <b>&ensp;{{state.name}}</b>
+        
+        <span class="pull-right float-xs-right">
+          <a class="panel-right" tooltip="Set as start" (click)="setStartState(state.id)">
+            <span class="glyphicon glyphicon-play"></span>
+          </a>
+          <a class="panel-right" tooltip="Edit" (click)="editState(state.id)">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </a>
+          <a class="panel-right" tooltip="Delete" (click)="deleteState(state.id)">
+            <span class="glyphicon glyphicon-trash"></span>
+          </a>
+        </span>
+      </div>
+      
+      <p>
+        {{state.description}}
+      </p>
+
+      <button type="button" class="btn btn-default list-item" (click)="addNewTransition()" tooltip="Add new transition">
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+
+      <accordion>
+        <div class="list-item" *ngFor="let transition of state.transitions">
+          <accordion-group #group>
+            <div accordion-heading>
+              <i class="pull-left float-xs-left glyphicon"
+              [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+              <b>&ensp;{{transition.name}}</b>
+              
+              <span class="pull-right float-xs-right">
+                <a class="panel-right" tooltip="Edit" (click)="editTransition(transition.id)">
+                  <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+                <a class="panel-right" tooltip="Delete" (click)="deleteTransition(transition.id, state.id)">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </a>
+              </span>
+            </div>
+            
+            <p>
+              {{transition.description}}
+            </p>
+
+            
+          </accordion-group>
+        </div>
+      </accordion>
+    </accordion-group>
+  </div>
+</accordion>
+
+<div class="row">
+  <div class="col-sm-12">
+    <alert type="info" *ngIf="statesEmpty">
+      <strong>Heads up!</strong> There are no states to display. To create new states click the plus button above.
+    </alert>
+  </div>
+</div>

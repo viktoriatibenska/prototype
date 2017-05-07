@@ -21,6 +21,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { DesignComponent } from './design/design.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { PlayComponent } from './play/play.component';
+import { ScenarioDesignComponent } from './scenario-design/scenario-design.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PlayComponent } from './play/play.component';
     BrowseComponent,
     DesignComponent,
     LogInComponent,
-    PlayComponent
+    PlayComponent,
+    ScenarioDesignComponent
   ],
   imports: [
     BrowserModule,

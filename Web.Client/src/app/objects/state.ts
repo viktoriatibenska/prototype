@@ -10,7 +10,7 @@ export class State {
     width: number;
     height: number;
     
-    transitions: Transition[];
+    transitions: Transition[] = [];
 
     constructor(
         id: number,

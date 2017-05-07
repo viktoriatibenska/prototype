@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 
 import { State } from '../objects/state';
 import { PatternService } from '../pattern.service';
@@ -16,6 +16,7 @@ export class PlayComponent implements OnInit {
   stateId: number;
   public isDataAvailable: boolean = false;
   public isTransitionsEmpty: boolean = false;
+  previousUrl: string;
 
   constructor(
     private patternService: PatternService,
@@ -24,6 +25,15 @@ export class PlayComponent implements OnInit {
   ) {
     this.isDataAvailable = false;
     this.isTransitionsEmpty = false;
+
+    router.events
+    .filter(event => event instanceof NavigationEnd)
+    .subscribe(e => {
+      if (this.previousUrl == null) {
+        this.previousUrl = e.url;
+      }
+      console.warn('prev:', this.previousUrl);
+    });
   }
 
   ngOnInit() {

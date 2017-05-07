@@ -24,7 +24,7 @@ export function toPatternWithVariation(r: any): Pattern {
         r.rating,
         r.is_published
     );
-    console.log('Parsed pattern:', pattern);
+    // console.log('Parsed pattern:', pattern);
     return pattern;
 }
 
@@ -42,7 +42,7 @@ export function toPattern(r: any): Pattern {
         r.rating,
         r.is_published
     );
-    console.log('Parsed pattern:', pattern);
+    // console.log('Parsed pattern:', pattern);
     return pattern;
 }
 
@@ -57,7 +57,7 @@ export function toState(r: any): State {
         r.width,
         r.height
     );
-    console.log('Parsed state:', state);
+    // console.log('Parsed state:', state);
     return state;
 }
 
@@ -69,6 +69,6 @@ export function toTransition(r: any): Transition {
         r.state_from_id,
         r.state_to_id
     );
-    console.log('Parsed transition:', transition);
+    // console.log('Parsed transition:', transition);
     return transition;
 }
