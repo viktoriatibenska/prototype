@@ -29,6 +29,7 @@ module.exports = {
   createState: createState,
   createTransition: createTransition,
   setVariationStartState: setVariationStartState,
+  getVariationStartState: getVariationStartState
 };
 
 function getAllPatterns(req, res, next) {
@@ -248,6 +249,21 @@ function setVariationStartState(req, res, next) {
         .json({
           status: 'success',
           message: 'Start state set'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+function getVariationStartState(req, res, next) {
+  db.one('select start_state_id from variation where id=$1', parseInt(req.params.id))
+    .then(function (data) {
+      res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Start state retrieved'
         });
     })
     .catch(function (err) {

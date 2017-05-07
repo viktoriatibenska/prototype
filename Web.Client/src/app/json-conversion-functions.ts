@@ -52,8 +52,8 @@ export function toState(r: any): State {
         r.variation_id,
         r.name,
         r.description,
-        r.positionX,
-        r.positionY,
+        r.position_x,
+        r.position_y,
         r.width,
         r.height
     );

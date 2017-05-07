@@ -22,5 +22,6 @@ router.put('/api/transition/:id', db.updateTransition);
 router.post('/api/transition', db.createTransition);
 
 router.put('/api/variation/setStartState/:id', db.setVariationStartState);
+router.get('/api/variation/setStartState/:id', db.getVariationStartState);
 
 module.exports = router;

@@ -47,6 +47,16 @@ export class PatternService {
         return response.json().data.map(toTransition);
     }
 
+    mapStartStateId(response: Response): number {
+        console.log('Mapping start state id');
+        let id = response.json().data.start_state_id;
+        if (id == null) {
+            return null;
+        } else {
+            return parseInt(id);
+        }
+    }
+
     private getHeaders(): Headers {
         const headers = new Headers();
         headers.append('Accept', 'application/json');
@@ -137,5 +147,14 @@ export class PatternService {
             .map(this.mapTransitions)
             .catch(this.handleError);
         return transitions$;
+    }
+
+    getStartState(variationId: number): Observable<number>{
+        console.log('Calling get for start state');
+        const startStateId$ = this.http
+            .get(`${this.baseUrl}/variation/setStartState/${variationId}`, {headers: this.getHeaders()})
+            .map(this.mapStartStateId)
+            .catch(this.handleError);
+        return startStateId$;
     }
 }
