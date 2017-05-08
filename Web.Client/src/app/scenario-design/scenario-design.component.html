@@ -12,7 +12,7 @@
       <div accordion-heading>
         <i class="pull-left float-xs-left glyphicon"
          [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
-        <b>&ensp;{{state.name}}</b>
+        <b>&ensp;{{state.id}}: {{state.name}}</b>
         
         <span class="pull-right float-xs-right">
           <a class="panel-right" tooltip="Set as start" (click)="setStartState(state.id)">
@@ -41,7 +41,10 @@
             <div accordion-heading>
               <i class="pull-left float-xs-left glyphicon"
               [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
-              <b>&ensp;{{transition.name}}</b>
+              
+              <b>&ensp;{{transition.stateTo.id}}: {{transition.stateTo.name}}</b>
+              <i class="glyphicon glyphicon-arrow-left"></i>
+              <b>{{transition.name}}</b>
               
               <span class="pull-right float-xs-right">
                 <a class="panel-right" tooltip="Edit" (click)="editTransition(transition.id)">

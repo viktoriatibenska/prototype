@@ -104,6 +104,15 @@ export class ScenarioDesignComponent implements OnInit {
       state.transitions = [];
     }
     for (let transition of this.transitions) {
+      transition.stateTo = this.states.filter((state) => {
+        if (state.id == transition.stateToId){
+          return true;
+        } else {
+          return false;
+        }
+      })[0];
+      console.log(transition.stateTo);
+
       this.states.filter((state) => {
         if (state.id == transition.stateFromId){
           return true;

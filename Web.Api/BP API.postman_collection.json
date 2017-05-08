@@ -1,0 +1,573 @@
+{
+	"variables": [],
+	"info": {
+		"name": "BP API",
+		"_postman_id": "b3e0172a-7af8-688e-83c2-d05fa1f38ec3",
+		"description": "Api for bachelor's thesis about organizational patterns.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/api/pattern",
+			"request": {
+				"url": "http://localhost:3000/api/pattern",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "GET for all patterns"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/pattern/:id",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/api/pattern/:id",
+					"protocol": "http",
+					"auth": {},
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"pattern",
+						":id"
+					],
+					"variable": [
+						{
+							"value": "2",
+							"id": "id"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "GET pattern by id"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/pattern/:id",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/api/pattern/:id",
+					"protocol": "http",
+					"auth": {},
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"pattern",
+						":id"
+					],
+					"variable": [
+						{
+							"value": "4",
+							"id": "id"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": "DELETE pattern by id"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/pattern",
+			"request": {
+				"url": "http://localhost:3000/api/pattern",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Test 2\",\n  \"context\": \"asdf asdf asdf sdf dsaf uh\"\n}"
+				},
+				"description": "POST add pattern"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/state/:id",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/api/state/:id",
+					"protocol": "http",
+					"auth": {},
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"state",
+						":id"
+					],
+					"variable": [
+						{
+							"value": "1",
+							"id": "id"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/transitions/:id",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/api/transitions/:variationId",
+					"protocol": "http",
+					"auth": {},
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"transitions",
+						":variationId"
+					],
+					"variable": [
+						{
+							"value": "",
+							"id": "variationId"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/state/:variationId",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/api/states/:variationId",
+					"protocol": "http",
+					"auth": {},
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"states",
+						":variationId"
+					],
+					"variable": [
+						{
+							"value": "4",
+							"id": "variationId"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Test 3\",\n  \"patlet\": \"\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/transition/:variationId",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/api/transition/:id",
+					"protocol": "http",
+					"auth": {},
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"transition",
+						":id"
+					],
+					"variable": [
+						{
+							"value": "",
+							"id": "id"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Test 3\",\n  \"patlet\": \"\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/transition/:id",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/api/transition/:id",
+					"protocol": "http",
+					"auth": {},
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"transition",
+						":id"
+					],
+					"variable": [
+						{
+							"value": "15",
+							"id": "id"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Test 3\",\n  \"patlet\": \"\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/pattern/:id",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/api/pattern/:id",
+					"protocol": "http",
+					"auth": {},
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"pattern",
+						":id"
+					],
+					"variable": [
+						{
+							"value": "21",
+							"id": "id"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Kolac 1\",\n  \"patlet\": \"recept 1\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/state/:id",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/api/state/:id",
+					"protocol": "http",
+					"auth": {},
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"state",
+						":id"
+					],
+					"variable": [
+						{
+							"value": "13",
+							"id": "id"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"State 1\",\n  \"description\": \"Begin\",\n  \"position_x\": \"200\",\n  \"position_y\": \"200\",\n  \"width\": \"160\",\n  \"height\": \"100\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/transition/:id",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/api/transition/:id",
+					"protocol": "http",
+					"auth": {},
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"transition",
+						":id"
+					],
+					"variable": [
+						{
+							"value": "16",
+							"id": "id"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Continue up1\",\n  \"description\": \"Continue\",\n  \"state_from_id\": 13,\n  \"state_to_id\": 14\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/state",
+			"request": {
+				"url": "http://localhost:3000/api/state",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"State 2\",\n  \"description\": \"End\",\n  \"position_x\": \"200\",\n  \"position_y\": \"200\",\n  \"width\": \"160\",\n  \"height\": \"100\",\n  \"variation_id\": 5\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/state/:id",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/api/state/:id",
+					"protocol": "http",
+					"auth": {},
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"state",
+						":id"
+					],
+					"variable": [
+						{
+							"value": "14",
+							"id": "id"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Test 3\",\n  \"patlet\": \"\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/transition",
+			"request": {
+				"url": "http://localhost:3000/api/transition",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Back\",\n  \"description\": \"Back to beginning\",\n  \"state_from_id\": 15,\n  \"state_to_id\": 13\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/variation/setStartState/:id",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/api/variation/setStartState/:id",
+					"protocol": "http",
+					"auth": {},
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"variation",
+						"setStartState",
+						":id"
+					],
+					"variable": [
+						{
+							"value": "5",
+							"id": "id"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"start_state_id\": 13\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/variation/setStartState/:id",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/api/variation/setStartState/:id",
+					"protocol": "http",
+					"auth": {},
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"variation",
+						"setStartState",
+						":id"
+					],
+					"variable": [
+						{
+							"value": "4",
+							"id": "id"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"start_state_id\": 13\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

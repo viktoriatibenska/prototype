@@ -16,10 +16,10 @@
         
         <span id="right-margin-fix" class="pull-right float-xs-right">
           <rating class="panel-right" [(ngModel)]="pattern.rating" [max]="max" [readonly]="isReadonly"></rating>
-          <a class="panel-right" *ngIf="pattern.isPublished" tooltip="Pattern is published. To cancel publication click here.">
+          <a class="panel-right" *ngIf="pattern.isPublished" tooltip="Pattern is published. To cancel publication click here." (click)="pattern.isPublished = !pattern.isPublished">
             <span class="glyphicon glyphicon-ok"></span>
           </a>
-          <a class="panel-right" *ngIf="!pattern.isPublished" tooltip="Pattern is not published. To do so click here.">
+          <a class="panel-right" *ngIf="!pattern.isPublished" tooltip="Pattern is not published. To do so click here." (click)="pattern.isPublished = !pattern.isPublished">
             <span class="glyphicon glyphicon-remove"></span>
           </a>
           <a class="panel-right" tooltip="Edit" (click)="editPattern(pattern.id)">

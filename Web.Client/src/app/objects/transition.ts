@@ -1,9 +1,13 @@
+import { State } from './state'
+
 export class Transition {
     id: number;
     name: string;
     description: string;
     stateFromId: number;
     stateToId: number;
+
+    stateTo: State;
 
     constructor(
         id: number,

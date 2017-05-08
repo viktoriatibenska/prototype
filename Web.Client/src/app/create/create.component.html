@@ -1,6 +1,5 @@
 <form [formGroup]="patternDetailForm" novalidate (ngSubmit)="save(patternDetailForm.value, patternDetailForm.valid)">
 
-  <!-- We'll add our form controls here -->
   <div>
     <label for="name">Name</label>
     <input type="text" class="form-control" formControlName="name">
