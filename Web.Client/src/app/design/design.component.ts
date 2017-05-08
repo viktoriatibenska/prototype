@@ -19,6 +19,7 @@ export class DesignComponent implements OnInit {
 
 	public states: State[] = [];
 	public transitions: Transition[] = [];
+	endingStates: string[] = [];
 	variationId: number;
 	startStateId: number;
 
@@ -75,6 +76,8 @@ export class DesignComponent implements OnInit {
 						this.transitions = transitions;
 						console.log('Transitions get success', this.transitions);
 
+						this.assignTransitions();
+
 						this.patternService
 							.getStartState(this.variationId)
 							.subscribe(stateId => {
@@ -111,6 +114,30 @@ export class DesignComponent implements OnInit {
 
 	playPattern() {
 		this.router.navigate(['play',this.startStateId]);
+	}
+
+	assignTransitions() {
+		for (let state of this.states) {
+		state.transitions = [];
+		}
+		for (let transition of this.transitions) {
+		transition.stateTo = this.states.filter((state) => {
+			if (state.id == transition.stateToId){
+			return true;
+			} else {
+			return false;
+			}
+		})[0];
+		console.log(transition.stateTo);
+
+		this.states.filter((state) => {
+			if (state.id == transition.stateFromId){
+			return true;
+			} else {
+			return false;
+			}
+		})[0].transitions.push(transition);
+		}
 	}
 
 	initGraph() {
@@ -153,7 +180,11 @@ export class DesignComponent implements OnInit {
 				attrs: this.attributes,
 				modelStateId: state.id,
 				fullDescription: state.description
-			}))
+			}));
+
+			if (state.transitions.length == 0) {
+				this.endingStates.push(this.graphStates[this.graphStates.length-1].id);
+			}
 		}
 		//console.warn(this.graphStates);
 		_.each(this.graphStates, (c) => { this.graph.addCell(c); });
@@ -204,15 +235,19 @@ export class DesignComponent implements OnInit {
 			})
 		);
 
-		// transitions for end states
-		var endStates = this.graphStates.filter((state) => {
-			if (state.attributes.modelStateId == this.startStateId){
-				return true;
-			} else {
-				return false;
-			}
-		})
+		for (let sid of this.endingStates) {
+			this.graphTransitions.push(
+				new this.uml.Transition({
+					source: { id: sid },
+					target: { id: this.graphStates[1].id },
+					attrs: { '.connection': this.linkAttrs },
+					modelTransition: null
+				})
+			);
+		}
 
 		this.graph.addCells(this.graphTransitions);
 	}
+
+	
 }
