@@ -3,6 +3,7 @@ import { Variation } from './objects/variation';
 import { State } from './objects/state';
 import { Transition } from './objects/transition';
 
+/** convert json to pattern with variation */
 export function toPatternWithVariation(r: any): Pattern {
     let pattern = new Pattern(
         r.pattern_pk_id,
@@ -28,6 +29,7 @@ export function toPatternWithVariation(r: any): Pattern {
     return pattern;
 }
 
+/** convert json to pattern */
 export function toPattern(r: any): Pattern {
     let pattern = new Pattern(
         r.id,
@@ -46,6 +48,7 @@ export function toPattern(r: any): Pattern {
     return pattern;
 }
 
+/** convert json to state */
 export function toState(r: any): State {
     let state = new State(
         r.id,
@@ -61,6 +64,7 @@ export function toState(r: any): State {
     return state;
 }
 
+/** convert json to transition */
 export function toTransition(r: any): Transition {
     let transition = new Transition(
         r.id,

@@ -1,3 +1,7 @@
+/**
+ * Component for graphical representation of game scenarios using UML statechart diagram
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 

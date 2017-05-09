@@ -1,3 +1,7 @@
+/**
+ * Class providing http calls for BE services and providing conversion from json to classes
+ */
+
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
@@ -22,6 +26,7 @@ export class PatternService {
 
     constructor(private http: Http) { }
 
+    /** functions to map json data with conversion functions */
     mapPatterns(response: Response): Pattern[] {
         console.log('Mapping patterns');
         return response.json().data.map(toPatternWithVariation);
@@ -78,6 +83,7 @@ export class PatternService {
         return Observable.throw(error.message || error);
     }
 
+    /** Get all patterns */
     getPatterns(): Observable<Pattern[]> {
         console.log('Calling get for patterns');
         const patterns$ = this.http
@@ -87,6 +93,7 @@ export class PatternService {
         return patterns$;
     }
 
+    /** get one pattern by id */
     getPattern(id: number): Observable<Pattern> {
         console.log('Getting pattern', id);
         const pattern$ = this.http
@@ -96,6 +103,7 @@ export class PatternService {
         return pattern$;
     }
 
+    /** delete pattern by id */
     deletePattern(id: number): Observable<void> {
         console.log('Calling delete for pattern', id);
         return this.http
@@ -103,6 +111,7 @@ export class PatternService {
                     .catch(this.handleError);
     }
 
+    /** create pattern */
     createPattern(pattern: Pattern): Observable<void> {
         console.log('Calling create for pattern');
         return this.http
@@ -113,6 +122,7 @@ export class PatternService {
             .catch(this.handleError);
     }
 
+    /** update pattern */
     updatePattern(pattern: Pattern): Observable<void> {
         console.log('Calling update for pattern', pattern.id);
         return this.http
@@ -123,6 +133,7 @@ export class PatternService {
             .catch(this.handleError);
     }
 
+    /** create state */
     createState(state: State): Observable<number> {
         console.log('Calling create for state');
         const id$ = this.http
@@ -140,6 +151,7 @@ export class PatternService {
         return id$;
     }
 
+    /** update state */
     updateState(state: State): Observable<void> {
         console.log('Calling update for state', state.id);
         return this.http
@@ -154,6 +166,7 @@ export class PatternService {
             .catch(this.handleError);
     }
 
+    /** create transition */
     createTransition(transition: Transition): Observable<number> {
         console.log('Calling create for transition');
         const id$ = this.http
@@ -189,6 +202,7 @@ export class PatternService {
         return state$;
     }
 
+    /** get all transitions of a state */
     getTransitionsByState(stateId: number): Observable<Transition[]>{
         console.log('Calling get for transitions of state', stateId);
         const transitions$ = this.http
@@ -198,6 +212,7 @@ export class PatternService {
         return transitions$;
     }
 
+    /** get states by variation */
     getStates(variationId: number): Observable<State[]>{
         console.log('Calling get for states');
         const states$ = this.http
@@ -207,6 +222,7 @@ export class PatternService {
         return states$;
     }
 
+    /** get transitions by variation */
     getTransitionsByVariation(variationId: number): Observable<Transition[]>{
         console.log('Calling get for transitions by variation');
         const transitions$ = this.http
@@ -216,6 +232,7 @@ export class PatternService {
         return transitions$;
     }
 
+    /** get start state */
     getStartState(variationId: number): Observable<number>{
         console.log('Calling get for start state');
         const startStateId$ = this.http

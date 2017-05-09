@@ -1,3 +1,7 @@
+/**
+ * Navigation bar component
+ */
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({

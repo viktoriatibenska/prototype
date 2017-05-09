@@ -1,3 +1,7 @@
+/**
+ * Component for browsing patterns
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { AccordionConfig } from 'ng2-bootstrap';
 import { Router } from '@angular/router';

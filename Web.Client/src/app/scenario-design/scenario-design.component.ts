@@ -1,3 +1,7 @@
+/**
+ * Component for designing text scenarios
+*/
+
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'
@@ -236,6 +240,7 @@ export class ScenarioDesignComponent implements OnInit {
     this.router.navigate(['design',this.variationId]);
   }
 
+  /** iterate through transitions to initialize array of transitions in state class */
   assignTransitions() {
     for (let state of this.states) {
       state.transitions = [];

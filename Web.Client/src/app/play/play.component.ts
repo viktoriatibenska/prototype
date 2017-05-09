@@ -1,3 +1,7 @@
+/**
+ * Component for gameplay
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 

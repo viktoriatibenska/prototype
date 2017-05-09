@@ -1,3 +1,7 @@
+/**
+ * Component for creating and editing patterns
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router'
