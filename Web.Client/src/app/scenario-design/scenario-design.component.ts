@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 
 import { PatternService } from '../pattern.service'
 import { State } from '../objects/state';
@@ -26,12 +26,14 @@ export class ScenarioDesignComponent implements OnInit {
   public stateFormSubmitted: boolean;
   public transitionFormSubmitted: boolean;
   public stateSelected: State = null;
-  public transitionSelectedId: number = null;
+  public transitionSelected: Transition = null;
+  public stateFromId: number = null;
 
   constructor(
     private _fb: FormBuilder,
     private patternService: PatternService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -130,10 +132,63 @@ export class ScenarioDesignComponent implements OnInit {
     this.transitionFormSubmitted = true;
 
     console.log(model, isValid);
+
+    if (isValid){
+      if (this.transitionSelected == null) {
+        model.stateFromId = this.stateFromId;
+        this.patternService
+            .createTransition(model)
+            .subscribe((id) => {
+              model.id = id;
+
+              this.transitions.push(model);
+              this.assignTransitions();
+
+              this.transitionSelected = null;
+              this.transitionForm.reset();
+            })
+      } else {
+        this.transitionSelected.name = model.name;
+        this.transitionSelected.description = model.description;
+        this.transitionSelected.stateToId = model.stateToId;
+
+        this.patternService
+            .updateTransition(this.transitionSelected)
+            .subscribe(() => {
+              this.states.filter((state) => {
+                return state.id == this.transitionSelected.stateFromId ? true : false;
+              })[0].transitions.filter((transition) => {
+                return transition.id == this.transitionSelected.id ? true : false;
+              })[0] = this.transitionSelected;
+              this.assignTransitions();
+              
+              this.transitionSelected = null;
+              this.transitionForm.reset();
+            })
+      }
+    }
+  }
+
+  editTransition(stateFromId: number, transition: Transition) {
+    this.transitionSelected = transition;
+    this.stateFromId = stateFromId;
+
+    if (this.transitionSelected != null) {
+      this.transitionForm.patchValue({
+        name: this.transitionSelected.name,
+        description: this.transitionSelected.description,
+        stateToId: this.transitionSelected.stateToId
+      });
+    }
   }
 
   clearStateForm() {
     this.stateForm.reset();
+  }
+
+  clearTransitionForm() {
+    this.transitionForm.reset();
+    this.transitionSelected = null;
   }
 
   setStartState(id: number) {
@@ -171,6 +226,14 @@ export class ScenarioDesignComponent implements OnInit {
           })
           this.assignTransitions();
         });
+  }
+
+  playPattern() {
+    this.router.navigate(['play', this.startStateId]);
+  }
+
+  switchToUml() {
+    this.router.navigate(['design',this.variationId]);
   }
 
   assignTransitions() {

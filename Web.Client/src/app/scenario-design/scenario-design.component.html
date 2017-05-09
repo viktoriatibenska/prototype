@@ -1,5 +1,11 @@
 <div class="row">
   <div class="col-sm-12">
+    <button type="button" class="btn btn-default" tooltip="Preview gameplay" (click)="playPattern()">
+      <span class="glyphicon glyphicon-play"></span>
+    </button>
+    <button type="button" class="btn btn-default" (click)="switchToUml()" tooltip="Switch to UML view">
+      <img src="src/resources/diagram-icon2.svg" height="18px">
+    </button>
     <button type="button" class="btn btn-default" (click)="stateModal.show()" tooltip="Add new state">
       <span class="glyphicon glyphicon-plus"></span>
     </button>
@@ -31,7 +37,7 @@
         {{state.description}}
       </p>
 
-      <button type="button" class="btn btn-default list-item" (click)="addNewTransition()" tooltip="Add new transition">
+      <button type="button" class="btn btn-default list-item" (click)="editTransition(state.id, null); transitionModal.show()" tooltip="Add new transition">
         <span class="glyphicon glyphicon-plus"></span>
       </button>
 
@@ -47,7 +53,7 @@
               <b>{{transition.name}}</b>
               
               <span class="pull-right float-xs-right">
-                <a class="panel-right" tooltip="Edit" (click)="editTransition(transition.id)">
+                <a class="panel-right" tooltip="Edit" (click)="editTransition(state.id, transition); transitionModal.show()">
                   <span class="glyphicon glyphicon-pencil"></span>
                 </a>
                 <a class="panel-right" tooltip="Delete" (click)="deleteTransition(transition.id, state.id)">
@@ -109,17 +115,41 @@
   </div>
 </div>
 
-<div bsModal #lgModal2="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div bsModal #transitionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title pull-left">Large modal 2</h4>
-        <button type="button" class="close pull-right" (click)="lgModal2.hide()" aria-label="Close">
+        <h4 class="modal-title pull-left">Transition</h4>
+        <button type="button" class="close pull-right" (click)="transitionModal.hide(); clearTransitionForm()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <form [formGroup]="transitionForm" novalidate (ngSubmit)="saveTransition(transitionForm.value, transitionForm.valid)">
+          <div>
+            <label for="name">Name</label>
+            <input type="text" class="form-control" formControlName="name">
+            <small [hidden]="transitionForm.controls.name.valid || (transitionForm.controls.name.pristine && !transitionFormSubmitted)">
+                Name is required.
+            </small>
+          </div>
+          <div>
+            <label for="name">Description</label>
+            <input type="text" class="form-control" formControlName="description">
+            <small [hidden]="transitionForm.controls.name.valid || (transitionForm.controls.name.pristine && !transitionFormSubmitted)">
+                Description is required.
+            </small>
+          </div>
+          <div>
+            <label for="name">Target state</label>
+            <input type="text" class="form-control" formControlName="stateToId">
+            <small [hidden]="transitionForm.controls.name.valid || (transitionForm.controls.name.pristine && !transitionFormSubmitted)">
+                Target state is required.
+            </small>
+          </div>
+
+          <button type="submit" class="btn btn-primary divider" (click)="transitionForm.valid ? transitionModal.hide() : null">Save</button>
+        </form>
       </div>
     </div>
   </div>

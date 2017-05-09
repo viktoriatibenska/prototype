@@ -141,15 +141,41 @@ export class PatternService {
     }
 
     updateState(state: State): Observable<void> {
-        console.log('Calling update for pattern', state.id);
+        console.log('Calling update for state', state.id);
         return this.http
-            .put(`${this.baseUrl}/pattern/${state.id}`, {
+            .put(`${this.baseUrl}/state/${state.id}`, {
                 'name': state.name,
                 'description': state.description,
                 'position_x': '200',
                 'position_y': '200',
                 'width': '160',
                 'height': '100'  
+            })
+            .catch(this.handleError);
+    }
+
+    createTransition(transition: Transition): Observable<number> {
+        console.log('Calling create for transition');
+        const id$ = this.http
+            .post(`${this.baseUrl}/transition`, {
+                'name': transition.name,
+                'description': transition.description,
+                'state_from_id': transition.stateFromId,
+                'state_to_id': transition.stateToId
+            })
+            .map(this.mapId)
+            .catch(this.handleError);
+        return id$;
+    }
+
+    updateTransition(transition: Transition): Observable<void> {
+        console.log('Calling update for transition', transition.id);
+        return this.http
+            .put(`${this.baseUrl}/transition/${transition.id}`, {
+                'name': transition.name,
+                'description': transition.description,
+                'state_from_id': transition.stateFromId,
+                'state_to_id': transition.stateToId 
             })
             .catch(this.handleError);
     }
