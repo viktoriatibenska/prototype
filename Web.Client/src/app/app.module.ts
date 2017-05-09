@@ -10,6 +10,7 @@ import { ButtonsModule } from 'ng2-bootstrap/buttons';
 import { AccordionModule } from 'ng2-bootstrap/accordion';
 import { RatingModule } from 'ng2-bootstrap/rating';
 import { TooltipModule } from 'ng2-bootstrap/tooltip';
+import { ModalModule } from 'ng2-bootstrap/modal';
 
 import { PatternService } from './pattern.service';
 import { AppComponent } from './app.component';
@@ -45,7 +46,8 @@ import { ScenarioDesignComponent } from './scenario-design/scenario-design.compo
     ButtonsModule.forRoot(),
     AccordionModule.forRoot(),
     RatingModule.forRoot(),
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    ModalModule.forRoot(),
   ],
   providers: [PatternService],
   bootstrap: [AppComponent]

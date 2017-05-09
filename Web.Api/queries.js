@@ -157,7 +157,7 @@ function createPattern(req, res, next) {
 
 function createState(req, res, next) {
   console.log("Creating state");
-  db.none('INSERT INTO state(name, description, position_x, position_y, width, height, variation_id) VALUES($1, $2, $3, $4, $5, $6, $7)', 
+  db.one('INSERT INTO state(name, description, position_x, position_y, width, height, variation_id) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id', 
           [
             req.body.name,
             req.body.description,
@@ -167,10 +167,11 @@ function createState(req, res, next) {
             parseFloat(req.body.height),
             parseInt(req.body.variation_id)
           ])
-    .then(() => {
+    .then((data) => {
       res.status(200)
       .json({
         status: 'success',
+        data: data,
         message: 'Inserted one state'
       });
     })
@@ -181,17 +182,18 @@ function createState(req, res, next) {
 
 function createTransition(req, res, next) {
   console.log("Creating transition");
-  db.none('INSERT INTO transition(name, description, state_from_id, state_to_id) VALUES($1, $2, $3, $4)',
+  db.one('INSERT INTO transition(name, description, state_from_id, state_to_id) VALUES($1, $2, $3, $4) RETURNING id',
           [
             req.body.name,
             req.body.description,
             parseInt(req.body.state_from_id),
             parseInt(req.body.state_to_id)
           ])
-    .then(() => {
+    .then((data) => {
       res.status(200)
       .json({
         status: 'success',
+        data: data,
         message: 'Inserted one transition'
       });
     })

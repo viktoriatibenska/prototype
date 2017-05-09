@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router'
 
 import { PatternService } from '../pattern.service'
@@ -20,12 +21,31 @@ export class ScenarioDesignComponent implements OnInit {
   public panelStart: string = "panel-success";
   public panelDefault: string = "panel-default";
 
+  public stateForm: FormGroup;
+  public transitionForm: FormGroup;
+  public stateFormSubmitted: boolean;
+  public transitionFormSubmitted: boolean;
+  public stateSelected: State = null;
+  public transitionSelectedId: number = null;
+
   constructor(
+    private _fb: FormBuilder,
     private patternService: PatternService,
     private _route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.stateForm = this._fb.group({
+      name: ['', <any>Validators.required],
+      description: ['', <any>Validators.required],
+    });
+
+    this.transitionForm = this._fb.group({
+      name: ['', <any>Validators.required],
+      description: ['', <any>Validators.required],
+      stateToId: ['', <any>Validators.required],
+    });
+
     this.variationId = parseInt(this._route.snapshot.params['variationId']);
 		this.patternService
 			.getStates(this.variationId)
@@ -60,7 +80,61 @@ export class ScenarioDesignComponent implements OnInit {
 			});
   }
 
-  addNewState() {}
+  saveState(model: State, isValid: boolean) {
+    this.stateFormSubmitted = true;
+
+    console.log(model, isValid);
+
+    if (isValid){
+      if (this.stateSelected == null) {
+        model.variationId = this.variationId;
+        //call save
+        this.patternService
+            .createState(model)
+            .subscribe((id) => {
+              model.id = id;
+
+              this.states.push(model);
+
+              this.stateSelected = null;
+              this.stateForm.reset();
+            })
+      } else {
+        this.stateSelected.name = model.name;
+        this.stateSelected.description = model.description;
+
+        this.patternService
+            .updateState(this.stateSelected)
+            .subscribe(() => {
+              this.states.filter((state) => {
+                return state.id == this.stateSelected.id ? true : false;
+              })[0] = this.stateSelected;
+
+              this.stateSelected = null;
+              this.stateForm.reset();
+            })
+      }
+    }
+  }
+
+  editState(state: State) {
+    this.stateSelected = state;
+
+    this.stateForm.patchValue({
+      name: this.stateSelected.name,
+      description: this.stateSelected.description
+    })
+  }
+
+  saveTransition(model: Transition, isValid: boolean) {
+    this.transitionFormSubmitted = true;
+
+    console.log(model, isValid);
+  }
+
+  clearStateForm() {
+    this.stateForm.reset();
+  }
 
   setStartState(id: number) {
     this.patternService

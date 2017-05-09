@@ -57,6 +57,16 @@ export class PatternService {
         }
     }
 
+    mapId(response: Response): number {
+        console.log('Mapping state id');
+        let id = response.json().data.id;
+        if (id == null) {
+            return null;
+        } else {
+            return parseInt(id);
+        }
+    }
+
     private getHeaders(): Headers {
         const headers = new Headers();
         headers.append('Accept', 'application/json');
@@ -113,6 +123,37 @@ export class PatternService {
             .catch(this.handleError);
     }
 
+    createState(state: State): Observable<number> {
+        console.log('Calling create for state');
+        const id$ = this.http
+            .post(`${this.baseUrl}/state`, {
+                'name': state.name,
+                'description': state.description,
+                'position_x': '200',
+                'position_y': '200',
+                'width': '160',
+                'height': '100',
+                'variation_id': state.variationId
+            })
+            .map(this.mapId)
+            .catch(this.handleError);
+        return id$;
+    }
+
+    updateState(state: State): Observable<void> {
+        console.log('Calling update for pattern', state.id);
+        return this.http
+            .put(`${this.baseUrl}/pattern/${state.id}`, {
+                'name': state.name,
+                'description': state.description,
+                'position_x': '200',
+                'position_y': '200',
+                'width': '160',
+                'height': '100'  
+            })
+            .catch(this.handleError);
+    }
+
     getState(id: number): Observable<State>{
         console.log('Calling get for state', id);
         const state$ = this.http
@@ -162,7 +203,7 @@ export class PatternService {
         console.log('Setting new start state');
         return this.http
                    .put(`${this.baseUrl}/variation/setStartState/${variationId}`, {
-                       "start_state_id": stateId
+                       'start_state_id': stateId
                    })
                    .catch(this.handleError)
     }

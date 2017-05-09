@@ -59,3 +59,7 @@ a:hover .glyphicon-remove {
 .row{
     margin-bottom: 1rem;
 }
+
+.divider {
+    margin-top: 1rem;
+}

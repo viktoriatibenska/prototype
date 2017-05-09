@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-12">
-    <button type="button" class="btn btn-default" (click)="addNewState()" tooltip="Add new state">
+    <button type="button" class="btn btn-default" (click)="stateModal.show()" tooltip="Add new state">
       <span class="glyphicon glyphicon-plus"></span>
     </button>
   </div>
@@ -18,7 +18,7 @@
           <a class="panel-right" tooltip="Set as start" (click)="setStartState(state.id)">
             <span class="glyphicon glyphicon-play"></span>
           </a>
-          <a class="panel-right" tooltip="Edit" (click)="editState(state.id)">
+          <a class="panel-right" tooltip="Edit" (click)="editState(state); stateModal.show()">
             <span class="glyphicon glyphicon-pencil"></span>
           </a>
           <a class="panel-right" tooltip="Delete" (click)="deleteState(state.id)">
@@ -73,5 +73,54 @@
     <alert type="info" *ngIf="statesEmpty">
       <strong>Heads up!</strong> There are no states to display. To create new states click the plus button above.
     </alert>
+  </div>
+</div>
+
+<div bsModal #stateModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">State</h4>
+        <button type="button" class="close pull-right" (click)="stateModal.hide(); clearStateForm()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="stateForm" novalidate (ngSubmit)="saveState(stateForm.value, stateForm.valid)">
+          <div>
+            <label for="name">Name</label>
+            <input type="text" class="form-control" formControlName="name">
+            <small [hidden]="stateForm.controls.name.valid || (stateForm.controls.name.pristine && !stateFormSubmitted)">
+                Name is required.
+            </small>
+          </div>
+          <div>
+            <label for="name">Description</label>
+            <input type="text" class="form-control" formControlName="description">
+            <small [hidden]="stateForm.controls.name.valid || (stateForm.controls.name.pristine && !stateFormSubmitted)">
+                Description is required.
+            </small>
+          </div>
+
+          <button type="submit" class="btn btn-primary divider" (click)="stateForm.valid ? stateModal.hide() : null">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #lgModal2="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Large modal 2</h4>
+        <button type="button" class="close pull-right" (click)="lgModal2.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+    </div>
   </div>
 </div>
